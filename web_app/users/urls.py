@@ -1,4 +1,4 @@
-import views
+import users.views as views
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 

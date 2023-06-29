@@ -13,17 +13,17 @@
         <div class="header">
             <div class="header__container">
                 <div class="header__item">
-                    <div><a href="/" class="item__logo">adonates</a></div>
+                    <div><a href="{% url 'greet_page' %}" class="item__logo">adonates</a></div>
                 </div>
                 {% if not user.is_authenticated %}
                 <ul class="items-list">
                     <li><a href="#" class="item__link"><i class='bx bx-home' ></i> для рекламодателей</a></li>
-                    <li><a href="/" class="item__link item__link-login"><i class='bx bx-receipt' ></i> войти</a></li>
+                    <li><a href="{% url 'login' %}" class="item__link item__link-login"><i class='bx bx-receipt' ></i> войти</a></li>
                 </ul>
                 {% else %}
                     <ul class="items-list">
-                    <li><a href="/" class="item__link"><i class='bx bx-home' ></i> Выйти</a></li>
-                    <li><a href="/" class="item__link item__link-login"><i class='bx bx-receipt' ></i> Профиль</a></li>
+                    <li><a href="{% url 'logout' %}" class="item__link"><i class='bx bx-home' ></i> Выйти</a></li>
+                    <li><a href="{% url 'statistics' %}" class="item__link item__link-login"><i class='bx bx-receipt' ></i> Профиль</a></li>
                 </ul>
                 {% endif %}
                 <div class="burger">
@@ -45,7 +45,7 @@
                     <div class="intro__text">
                         <div class="intro__title title">Лучший инструмент любого стримера</div>
                         <div class="intro__subtitle subtitle">Используйте свой потенциал на максимум: зарабывайте, преумножайте, продвигайтесь</div>
-                        <a href="/" class="intro__button button"><div>Начать использовать</div></a>
+                        <a href="{% url 'login' %}" class="intro__button button"><div>Начать использовать</div></a>
                     </div>
                 </div>
             </section>
@@ -147,7 +147,7 @@
                         <div class="about__join-text title">
                             Присоединяйтесь! С нами выгодно
                         </div>
-                        <a href="/" class="about__join-button button">Начать использовать</a>
+                        <a href="{% url 'login' %}" class="about__join-button button">Начать использовать</a>
                     </div>
                 </section>
             </section>
@@ -159,7 +159,7 @@
                             adonates
                         </div>
                         <div class="footer__rights">
-                            2022, All rights reserved
+                            2022, Все права защищены
                         </div>
                     </div>
                     <div class="footer__social">

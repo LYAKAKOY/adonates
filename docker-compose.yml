@@ -1,0 +1,103 @@
+services:
+
+  web-app:
+    build:
+      context: .
+    volumes:
+      - ./web_app:/web_app
+    env_file:
+      - .env
+    networks:
+      - web_app_network
+    ports:
+      - '8000:8000'
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    volumes:
+      - type: volume
+        source: data
+        target: /var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: donations_service
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pass
+    networks:
+      - web_app_network
+    restart: always
+
+  redis:
+    image: redis:7.0.11-alpine
+    hostname: redis
+    volumes:
+      - type: volume
+        source: data_redis
+        target: /data
+    networks:
+      - web_app_network
+    restart: always
+
+  celery_worker1:
+    build:
+      context: .
+    hostname: celery_worker1
+    entrypoint: celery
+    command:
+      -A celery_app.app worker --loglevel=info
+    volumes:
+      - ./web_app:/web_app
+    env_file:
+      - .env
+    networks:
+      - web_app_network
+    depends_on:
+      - redis
+      - database
+    restart: always
+
+  celery_worker2:
+    build:
+      context: .
+    hostname: celery_worker2
+    entrypoint: celery
+    command:
+      -A celery_app.app beat --loglevel=info
+    volumes:
+      - ./web_app:/web_app
+    env_file:
+      - .env
+    networks:
+      - web_app_network
+    depends_on:
+      - redis
+      - database
+    restart: always
+
+  flower:
+    build:
+      context: .
+    hostname: flower
+    entrypoint: celery
+    command:
+      -A celery_app.app flower
+    volumes:
+      - ./web_app:/web_app
+    networks:
+      - web_app_network
+    depends_on:
+      - redis
+    ports:
+      - '5555:5555'
+    restart: always
+
+networks:
+  web_app_network:
+    driver: bridge
+
+volumes:
+  data:
+  data_redis:

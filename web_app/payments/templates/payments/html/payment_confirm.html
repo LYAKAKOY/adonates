@@ -1,10 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'payments/css/donate.css' %}">
+    <title>Подтверждение платежа</title>
 </head>
-<body>
-
+<body onload="setData()">
+    <section class="wrapper">
+        <section class="donation-menu">
+            <div class="left__info">
+                <div class="left__info-main">
+                    <p>Сумма: {{ payment.amount.value }} {{ payment.amount.currency }}</p>
+                     <button class="left__info-button"><a href="{{ payment.confirmation.confirmation_url }}">Оплатить</a></button>
+                    <div class="back">
+                        <a href="{% url 'greet_page' %}">
+                            Назад
+                        </a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="right__info">
+                <div class="streamer__profile">
+                    <img src="{% static 'payments/pictures/unnamed.jpg' %}" alt="">
+                    <div class="title">PAnanasik</div>
+                    <div class="subtitle">этот стример получит ваш донат</div>
+                </div>
+            </div>
+        </section>
+    </section>
 </body>
 </html>

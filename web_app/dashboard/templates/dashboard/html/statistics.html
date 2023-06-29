@@ -1,5 +1,6 @@
 {% extends 'dashboard/html/base.html' %}{% load static %}
 {% block style %}<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">{% endblock %}
+{% block title %}Статистика{% endblock %}
 {% block navigator %}
 <a href="{% url 'statistics' %}">
   <li class="highlight">

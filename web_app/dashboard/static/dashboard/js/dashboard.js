@@ -19,9 +19,10 @@ xhr.onload = function() {
     const response = JSON.parse(xhr.responseText);
     const statistics = response.statistics_for_last_week
     const totalSum = statistics.reduce((total, item) => total + item.day_sum, 0);
-    let i = 1
+    let i = 0
     for(let item of moneyCount) {
-      item.innerHTML = `${Math.floor(totalSum / (10*i))}P`
+      let money = Math.floor(totalSum / (2*i))
+      item.innerHTML = `${i === 0 ? totalSum: money}P`
       i++
     }
     if (totalSum === 0) {
@@ -47,7 +48,7 @@ xhr.onload = function() {
           this.classList.remove('selected');
         });
 
-        let n = (statistics[i].day_sum / totalSum) * 100;
+        let n = (statistics[i].day_sum / totalSum) * 250;
         item.style.height = `${n}px`;
         item.style.marginTop = `${250 - n}px`;
         i++;

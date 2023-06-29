@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'users/css/style.css' %}">
+    <title>Intro page</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="header__container">
+                <div class="header__item">
+                    <div><a href="/" class="item__logo">adonates</a></div>
+                </div>
+                {% if not user.is_authenticated %}
+                <ul class="items-list">
+                    <li><a href="#" class="item__link"><i class='bx bx-home' ></i> для рекламодателей</a></li>
+                    <li><a href="/" class="item__link item__link-login"><i class='bx bx-receipt' ></i> войти</a></li>
+                </ul>
+                {% else %}
+                    <ul class="items-list">
+                    <li><a href="/" class="item__link"><i class='bx bx-home' ></i> Выйти</a></li>
+                    <li><a href="/" class="item__link item__link-login"><i class='bx bx-receipt' ></i> Профиль</a></li>
+                </ul>
+                {% endif %}
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+        </div>
+        <main class="main">
+            <section class="intro section">
+                <div class="video">
+                    <div class="video__filler"></div>
+                    <video loop muted autoplay preload="auto" class="video__item">
+                        <source src = "{% static 'users/video/intro-video.webm' %}" type="video/webm">
+                    </video>
+                </div>
+                <div class="intro__inner">
+                    <div class="intro__text">
+                        <div class="intro__title title">Лучший инструмент любого стримера</div>
+                        <div class="intro__subtitle subtitle">Используйте свой потенциал на максимум: зарабывайте, преумножайте, продвигайтесь</div>
+                        <a href="/" class="intro__button button"><div>Начать использовать</div></a>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section class="advantages" id="aboutus">
+                <div class="advantages__inner">
+                    <div class="advantages__title title">Наши преимущества</div>
+                    <div class="advantages__item-container-first advantages__item-container">
+                            <div class="advantages__item-first advantages__item">
+                                <div class="advantages__item-inner">
+                                    <div class="advantages__item-title">Низкая комиссия</div>
+                                    <div class="advantages__item-subtitle">Комиссия ниже, чем у аналогов</div>
+                                </div>
+                            </div>
+
+                            <div class="advantages__item-second advantages__item">
+                                <div class="advantages__item-inner">
+                                    <div class="advantages__item-title">Удобство</div>
+                                    <div class="advantages__item-subtitle">Наш проект интуитивно понятен, так что каждый сможет разобраться</div>
+                                </div>
+                            </div>
+
+                            <div class="advantages__item-third advantages__item">
+                                <div class="advantages__item-inner">
+                                    <div class="advantages__item-title">Лояльность</div>
+                                    <div class="advantages__item-subtitle">Благодаря вам, мы делаем инструмент лучше каждый день</div>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="advantages__item-container-second advantages__item-container">
+                        <div class="advantages__item-fourth advantages__item">
+                            <div class="advantages__item-inner">
+                                <div class="advantages__item-title">Все лучшее в одном инструменте</div>
+                                <div class="advantages__item-subtitle">Наш инструмент дает все необходимое стримеру</div>
+                            </div>
+                        </div>
+
+                        <div class="advantages__item-fifth advantages__item">
+                            <div class="advantages__item-inner">
+                                <div class="advantages__item-title">Грамотная техподдержка</div>
+                                <div class="advantages__item-subtitle">Вы точно будете услышаны</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+            <section class="platform-about">
+                <div class="platform-about__title title">О платформе</div>
+                <section class="about__instrument platform-section">
+                    <div class="about__instrument-inner platform__inner-about">
+                        <div class="about__instrument-text platform__text-about">
+                            <div class="about__instrument-title platform__inner-about-title title">Лучший инструмент стримера</div>
+                            <div class="about__instrument-subtitle platform__inner-about-subtitle subtitle">инструмент прост и легок в использовании, а наша техподдержка поможет при случае возникновения вопросов</div>
+                        </div>
+                        <div class="about__instrument-img platform-section-img">
+                            <img src="{% static 'users/pictures/platform.png' %}" alt="">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="about__withdraw platform-section">
+                    <div class="about__withdraw-inner platform__inner-about">
+                        <div class="about__withdraw-img platform-section-img">
+                            <img src="{% static 'users/pictures/withdraw.png' %}" alt="">
+                        </div>
+                        <div class="about__withdraw-text platform__text-about">
+                            <div class="about__withdraw-title platform__inner-about-title title">Комфортность и легкость вывода</div>
+                            <div class="about__withdraw-subtitle platform__inner-about-subtitle subtitle">
+                                инструмент прост и легок в использовании, а наша
+                                техподдержка поможет при случае возникновения
+                                вопросов
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="about__safety platform-section">
+                    <div class="about__safety-inner platform__inner-about">
+                        <div class="about__safety-text platform__text-about">
+                            <div class="about__safety-title platform__inner-about-title title">Скорость и безопасность</div>
+                            <div class="about__safety-subtitle platform__inner-about-subtitle subtitle">
+                                мы работаем с Альфа Банком - самым безопасным
+                                банком страны
+                            </div>
+                        </div>
+                        <div class="about__safety-img platform-section-img platform-section-alphabank">
+                            <img src="{% static 'users/pictures/adonates.png' %}" alt="">
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="about__join">
+                    <div class="about__join-inner">
+                        <div class="about__join-text title">
+                            Присоединяйтесь! С нами выгодно
+                        </div>
+                        <a href="/" class="about__join-button button">Начать использовать</a>
+                    </div>
+                </section>
+            </section>
+
+            <footer class="footer">
+                <div class="footer__inner">
+                    <div class="footer__text">
+                        <div class="footer__name">
+                            adonates
+                        </div>
+                        <div class="footer__rights">
+                            2022, All rights reserved
+                        </div>
+                    </div>
+                    <div class="footer__social">
+                        <div class="footer__social-title">Мы в социальных сетях:</div>
+                        <div class="footer__social-container">
+                            <a class="footer__social-item" href="#"><img src="{% static 'users/pictures/icons/icon-vk.png' %}" alt=""></a>
+                            <a class="footer__social-item" href="#"><img src="{% static 'users/pictures/icons/icon-discord.png' %}" alt=""></a>
+                            <a class="footer__social-item" href="#"><img src="{% static 'users/pictures/icons/icon-telegram.png' %}" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+
+        </main>
+    </div>
+
+    <script src="{% static 'users/js/main.js' %}"></script>
+
+</body>
+</html>

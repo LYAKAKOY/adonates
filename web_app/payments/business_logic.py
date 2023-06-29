@@ -27,7 +27,7 @@ def payout_logic(request: HttpRequest) -> bool:
 
 def payment_logic(form: DonateForm, username: str) -> str:
     payment_yoo = YouKassaPayment(settings.YOOKASSA_SHOP_ID, settings.YOOKASSA_SECRET_KEY)
-    payment = payment_yoo.create_payment(form.cleaned_data['donated_sum'], "http://localhost:8000/")
+    payment = payment_yoo.create_payment(form.cleaned_data['donated_sum'], settings.YOOKASSA_REDIRECT_URL)
     PaymentModel.objects.create(payment_id=payment.id, payment_sum=payment.amount.value,
                                 status=payment.status)
     DonateModel.objects.create(payment=PaymentModel.objects.get(payment_id=payment.id),

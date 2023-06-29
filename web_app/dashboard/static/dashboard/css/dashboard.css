@@ -58,7 +58,6 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   height: 50px;
   align-items: center;
-  pointer-events: none;
   opacity: 0;
   position: relative;
   top: 17px;
@@ -67,16 +66,26 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar.active .logo_content .logo {
   opacity: 1;
-  pointer-events: none;
   font-size: 18px;
   font-weight: 600;
+  text-decoration: none;
+}
+
+.sidebar.active .logo_content .logo .logo__name a {
+  text-decoration: none;
+  color: #fff;
+  transition: opacity 0.1s ease;
+}
+
+.sidebar.active .logo_content .logo .logo__name a:hover {
+  opacity: 0.7;
 }
 
 .burgerside div {
   width: 20px;
   height: 2px;
   margin: 4px;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
   background-color: #fff;
 }
 
@@ -117,26 +126,28 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar ul {
   padding: 0;
   margin-top: 20px;
-  left: 25px;
   position: relative;
 }
 
-.sidebar ul li {
+.sidebar ul a {
+  width: 100%;
   list-style-type: none;
   height: 50px;
   line-height: 50px;
+  text-decoration: none;
 }
 
-.sidebar ul li a {
+.sidebar ul a li {
   text-decoration: none;
   white-space: nowrap;
   display: flex;
   align-items: center;
-  width: 50px;
+  padding: 0 0 0 25px;
   pointer-events: none;
+  transition: background-color 0.2s ease;
 }
 
-.sidebar ul li a:focus {
+.sidebar ul a:focus {
   outline: none;
 }
 
@@ -205,7 +216,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   right: 280px;
   top: 0;
-  background-image: url(../../../PycharmProjects/adonates/web_app/users/static/users/pictures/rectangles/Rectangle16.svg);
+  background-image: url(../pictures/Rectangle16.svg);
   width: 350px;
   height: 200px;
   background-repeat: no-repeat;
@@ -216,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   right: 100px;
   top: 0;
-  background-image: url(../../../PycharmProjects/adonates/web_app/users/static/users/pictures/rectangles/Rectangle14.svg);
+  background-image: url(../pictures/Rectangle14.svg);
   width: 350px;
   height: 200px;
   background-repeat: no-repeat;
@@ -227,7 +238,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   right: 0;
   top: 0;
-  background-image: url(../../../PycharmProjects/adonates/web_app/users/static/users/pictures/rectangles/Rectangle15.svg);
+  background-image: url(../pictures/Rectangle15.svg);
   width: 280px;
   height: 200px;
   background-repeat: no-repeat;
@@ -320,7 +331,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .diagram__item.selected::before {
-  content: "13000Р 01.11";
+  content: '2424P 12.12';
   display: flex;
   justify-content: center;
   align-items: center;
@@ -340,26 +351,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .diagram__item:hover {
   background: #E94D56;
-}
-
-.diagram__item:nth-child(1) {
-  margin-top: 100px;
-  height: 150px;
-}
-
-.diagram__item:nth-child(2) {
-  margin-top: 30px;
-  height: 220px;
-}
-
-.diagram__item:nth-child(3) {
-  margin-top: 140px;
-  height: 110px;
-}
-
-.diagram__item:nth-child(4) {
-  margin-top: 190px;
-  height: 60px;
 }
 
 .diagram__info {
@@ -386,7 +377,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .donates {
   width: 100%;
-  height: 630px;
+  max-height: 100%;
+  min-height: 150px;
   border-radius: 12px;
 }
 
@@ -403,17 +395,23 @@ h1, h2, h3, h4, h5, h6 {
 
 .donates__item {
   width: 100%;
-  height: 100px;
+  height: 100%;
+  min-height: 100px;
   background: rgba(255, 255, 255, 0.8);
   /* box-shadow: 1px 10px 15px rgba(0, 0, 0, 0.1); */
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 0 40px;
+  padding: 10px 40px;
   position: relative;
   border-radius: 8px;
   margin: 0 0 15px 0;
+}
+
+.donates__item-text {
+  width: 100%;
+  word-wrap: break-word;
 }
 
 .donates__item:last-child {
@@ -702,3 +700,6 @@ h1, h2, h3, h4, h5, h6 {
     width: 10px;
   }
 }/*# sourceMappingURL=dashboard.css.map */
+ .highlight {
+    background: rgba(255, 255, 255, 0.1);
+ }

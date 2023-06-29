@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     'payments.apps.PaymentsConfig',
     'users.apps.UsersConfig',
+    'dashboard.apps.DashboardConfig',
 
     'social_django',
 ]

@@ -1,0 +1,104 @@
+{% extends 'dashboard/html/base.html' %}{% load static %}
+{% block style %}<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">{% endblock %}
+{% block navigator %}
+<a href="{% url 'dashboard' %}">
+  <li class="highlight">
+    <i class='bx bxs-dashboard'></i>
+    <span class="links_name">Панель</span>
+  </li>
+</a>
+<a href="{% url 'withdraw' %}">
+  <li>
+    <i class='bx bx-money-withdraw'></i>
+    <span class="links_name" >Вывод</span>
+  </li>
+</a>
+{% endblock %}
+{% block content %}
+<section class="intro">
+            <div class="intro__inner">
+                <div class="intro__text">
+                    Здравствуйте,
+                </div>
+                <div class="intro__text">
+                    {{ user.first_name }}
+                </div>
+                <div class="rectangles">
+                    <div class="rectangle__item-first"></div>
+                    <div class="rectangle__item-second"></div>
+                    <div class="rectangle__item-third"></div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <section class="additional-content">
+                <section class="weekly-stats">
+                    <h1 class="weekly-stats-title title">Статистика за неделю</h1>
+                    <section class="weekly-stats-inner">
+                        <div class="money">
+                            <p class="money-count"></p>
+                            <p class="money-count"></p>
+                            <p class="money-count"></p>
+                        </div>
+                        <div class="diagram">
+                            <div class="diagram__inner">
+                                <div class="diagram__item"></div>
+                                <div class="diagram__item"></div>
+                                <div class="diagram__item"></div>
+                                <div class="diagram__item"></div>
+                                <div class="diagram__item"></div>
+                                <div class="diagram__item"></div>
+                                <div class="diagram__item"></div>
+                            </div>
+                            <div class="diagram__info">
+                                <div class="diagram__day"></div>
+                                <div class="diagram__day"></div>
+                                <div class="diagram__day"></div>
+                                <div class="diagram__day"></div>
+                                <div class="diagram__day"></div>
+                                <div class="diagram__day"></div>
+                                <div class="diagram__day"></div>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section class="further-content">
+                    <section class="purpose">
+                        <h1 class="purpose-title title">Активная цель</h1>
+                        <section class="purpose-inner">
+                            <div class="purpose__circle-outer">
+                                <div class="purpose__circle-inner">
+                                    <div class="purpose__circle-inner-text">{{ account.balance }}/</div>
+                                    <div class="purpose__circle-inner-text">{{ account.goal }}</div>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="stats">
+                        <h1 class="stats-title title">Донатов (за последние 5 месяцев)</h1>
+                        <section class="stats-inner">
+                            {% for donate in statistics_by_months %}
+                            <div class="stats-inner__info">
+                                <div class="stats-inner-item">
+                                    <div class="stats-inner-item-month">{{ donate.month }}</div>
+                                    <div class="stats-inner-item-cash">{{ donate.month_sum }}Р</div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="donates">
+                <h1 class="donates-title title">Последние донаты</h1>
+                <section class="donates-inner">
+                    {% for donate in donations %}
+                    <div class="donates__item">
+                        <h1 class="donates__item-title">{{ donate.donate_sum }}Р, {{ donate.nickname }}</h1>
+                        <div class="donates__item-text"> <p>{{ donate.message }}</p></div>
+                    </div>
+                    {%  endfor %}
+                </section>
+            </section>
+        </section>
+{% endblock %}

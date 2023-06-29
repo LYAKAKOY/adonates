@@ -127,3 +127,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+YOOKASSA_SHOP_ID = os.environ.get('YOOKASSA_SHOP_ID')
+YOOKASSA_SECRET_KEY = os.environ.get('YOOKASSA_SECRET_KEY')
+
+YOOKASSA_AGENT_ID = os.environ.get('YOOKASSA_AGENT_ID')
+YOOKASSA_PAYOUT_SECRET_KEY = os.environ.get('YOOKASSA_PAYOUT_SECRET_KEY')

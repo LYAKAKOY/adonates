@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block style %}{% endblock %}
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Dashboard</title>
+</head>
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <div class="logo__name"><a href="/">adonates</a></div>
+            </div>
+            <div class="burgerside" id="btnside">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+        <ul class="nav_list">
+            {% block navigator %}{% endblock %}
+        </ul>
+    </div>
+
+    <section class="main-content">
+        {% block content %}{% endblock %}
+    </section>
+
+    <script src="{% static 'dashboard/js/dashboard.js' %}"></script>
+</body>
+</html>

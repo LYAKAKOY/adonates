@@ -1,0 +1,25 @@
+from django.db import models
+from django.contrib.auth.models import User
+from payments.models import PaymentModel
+
+
+class DonateModel(models.Model):
+    payment = models.OneToOneField(PaymentModel, on_delete=models.PROTECT)
+    nickname = models.CharField(verbose_name='Псевдоним', max_length=50)
+    message = models.TextField(verbose_name='Сообщение доната', null=True, blank=True)
+    streamer = models.ForeignKey('StreamerModel', related_name='streamer', on_delete=models.CASCADE)
+    withdrawn = models.BooleanField(verbose_name='Выведено', default=False)
+
+    def __str__(self):
+        return f'{self.nickname}: {self.payment.payment_sum}'
+
+
+class StreamerModel(models.Model):
+    user = models.OneToOneField(User, related_name='user', verbose_name='Пользователь', on_delete=models.PROTECT)
+    avatar = models.ImageField
+    balance = models.DecimalField(verbose_name='Общая сумма', max_digits=10, decimal_places=2, default=0)
+    count_donations = models.IntegerField(verbose_name='Количество донатов', default=0)
+    goal = models.DecimalField(verbose_name='Цель', max_digits=10, decimal_places=0, default=0)
+
+    def __str__(self):
+        return f'{self.user.username}'

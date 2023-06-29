@@ -14,3 +14,14 @@ def create_donation_account(sender: User, instance: User, created: bool, **kwarg
         donation_account.user = instance
         donation_account.save()
 
+
+@receiver(post_save, sender=DonateModel)
+def recalc_balance(sender, instance: DonateModel, created: bool, **kwargs) -> None:
+    if created:
+        recount_total_sum.delay(instance.payment.pk)
+
+
+@receiver(post_save, sender=PaymentModel)
+def recalc_balance(sender, instance: PaymentModel, created: bool, **kwargs) -> None:
+    if DonateModel.objects.filter(payment=instance).exists():
+        recount_total_sum.delay(instance.pk)

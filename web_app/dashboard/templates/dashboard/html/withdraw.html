@@ -1,0 +1,72 @@
+{% extends 'dashboard/html/base.html' %}{% load static %}
+{% block style %}<link rel="stylesheet" href="{% static 'dashboard/css/withdraw.css' %}">{% endblock %}
+{% block navigator %}
+<a href="{% url 'dashboard' %}">
+    <li>
+        <i class='bx bxs-dashboard'></i>
+        <span class="links_name">Панель</span>
+    </li>
+</a>
+<a href="{% url 'withdraw' %}">
+    <li class="highlight">
+        <i class='bx bx-money-withdraw'></i>
+        <span class="links_name" >Вывод</span>
+    </li>
+</a>
+{% endblock %}
+{% block content %}
+        <section class="general-container">
+            <section class="important__info">
+                <section class="balance">
+                    <div class="balance__title title">Баланс</div>
+                    <div class="balance__inner">
+                        <div class="balance__info">
+                            Ваш баланс: {{ account.balance }}Р
+                            <a href="{% url 'payout_notification' %}" class="withdraw-button button">Вывести</a>
+                        </div>
+                        <div class="rectangle">
+                            <div class="rectangle__item-first"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="withdraw-method">
+                    <div class="withdraw__title title">Способ вывода</div>
+                    <div class="withdraw__inner">
+                        <div class="withdraw__text">
+                            Вы еще не добавили никакой <br> способ вывода
+                            <a href="" class="withdraw__text-button button">Добавить</a>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <section class="cash">
+                <section class="topdon">
+                    <div class="topdon__title title"> Топ донатеров </div>
+                    <div class="topdon__inner">
+                        {% for donate in top_donations %}
+                       <div class="topdon__item">
+                            <div class="topdon__item-avatar"><img src="{% static 'dashboard/pictures/avatar-example.jpg' %}" alt=""></div>
+                            <div class="topdon__item-info">
+                                <div class="topdon__info-nick">{{ donate.nickname }}</div>
+                                <div class="topdon__info-cash">{{ donate.total_donated_sum }}Р</div>
+                            </div>
+                       </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                <div class="cash__title title">
+                    История выводов
+                    <a href="" class="cash__title-more">Подробнее</a>
+                </div>
+                <div class="cash__inner">
+                    {% for withdraw in withdrawals %}
+                    <div class="cash__item">
+                        <div class="cash__item-text">{{ withdraw.payout_sum }}Р</div>
+                        <div class="cash__item-time">{{ withdraw.payout_date }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </section>
+{% endblock %}

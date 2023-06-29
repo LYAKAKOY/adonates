@@ -1,3 +1,3 @@
 .idea
-*.env
+.env
 web_app/**/__pycache__/

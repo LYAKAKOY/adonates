@@ -7,6 +7,10 @@ from yookassa.domain.models.currency import Currency
 class YouKassaPayout:
     __slots__ = ['agent_id', 'secret_key']
 
+    def __init__(self, agent_id: Configuration.account_id, secret_key: Configuration.secret_key):
+        self.agent_id = agent_id
+        self.secret_key = secret_key
+
     def create_payout_yookassa(self, sum_of_money: int, account_number: int) -> Payout.create:
         Configuration.account_id = self.agent_id
         Configuration.secret_key = self.secret_key

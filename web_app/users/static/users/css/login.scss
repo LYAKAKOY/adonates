@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+        
+body, html {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 15px;
+    line-height: 1.6;
+    color: #0e0e0e;
+    height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background: linear-gradient(258.5deg, rgba(220, 64, 73, 0.3) 4.55%, rgba(0, 0, 0, 0.25) 38.1%), #1F1F1F;
+    // background: #181818;
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+$maxWidth: 1920;
+
+@mixin adaptive-font($pcSize, $mobSize) {
+    $addSize: $pcSize - $mobSize;
+    $addMobSize: $addSize + $addSize * 0.7;
+    @media (max-width: 767px) {
+        font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+    }
+    @media (min-width: 767px) {
+        font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+    }
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.main {
+    flex: 1 1 auto;
+}
+
+.back {
+    color: #ffffff;
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 90px;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.back:hover {
+    color: #e3e3e3;
+}
+
+.bx-arrow-back {
+    color: #ffffffe7;
+}
+
+.form_auth_section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.container__content {
+    width: 100%;
+    height: 100vh;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.form__content {
+    width: 600px;
+    margin: 0 20px;
+    min-width: 310px;
+    height: 350px;
+    padding: 45px;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+
+    background: #1F1F1F;
+    border-radius: 10px;
+    box-shadow: 10px -5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.form__auth {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form__text {
+    @include adaptive-font(18, 14);
+    display: flex;
+    align-items: center;
+    
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 10px;
+}
+
+.form__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 380px;
+}
+
+.form__social {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    
+}
+
+.form__social-item img {
+    width: 60px;
+    height: 60px;
+}
+
+.form__important-text {
+    @include adaptive-font(16, 12);
+    margin: 30px 50px 0 50px;
+    text-align: center;
+}
+
+// .form__text i {
+//     margin: 0 5px 0 0;
+// }
+
+// .bx-envelope {
+//     padding: 1px 0 0 0;
+// }
+
+// .input__field {
+//     width: 300px;
+//     padding: 8px;
+//     border-radius: 4px;
+//     border: 1px solid #bdbdbd;
+//     font-family: inherit;
+// }
+
+// .input__field:focus {
+//     outline: rgba(255, 255, 255, 0.25) solid;
+// }
+
+// .button {
+//     margin: 25px 0 0 0;
+//     padding: 10px;
+//     border-radius: 4px;
+//     border: none;
+//     background: #DC4049;
+//     color: #fff;
+
+//     transition: all 0.2s ease;
+//     cursor: pointer;
+//     font-weight: 700;
+//     font-size: 18px;    
+//     font-family: inherit;
+// }
+
+// .button-forgot {
+//     margin: 10px 0 0 0;
+// }
+
+// .button:hover {
+//     background: #be3a41;
+// }
+
+// .useful_links {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-evenly;
+// }
+
+// /* https://coolors.co/e5d9f2-f5efff-cdc1ff-a594f9-7371fc     */
+
+
+// .checkbox_container {
+//     padding: 0;
+//     margin: 0;
+//     font-size: 18px;
+// }
+
+// .useful_links {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-evenly;
+// }
+
+// @media screen and (max-width: 780px) {
+
+//     .form__content-head-registration {
+//         width: 125px;
+//         height: 125px;
+//     }
+
+//     .form__content {
+//         max-width: 300px;
+//     }
+
+//     .input__field {
+//         width: 220px;
+//     }
+
+//     .form__content-registration {
+//         height: 650px;
+//         margin: 50px 0;
+//     }
+// }
+
+
+// @media screen and (max-width: 420px) {
+//     /* .form__content {
+//         min-height: 300px;
+//     } */
+
+//     .form__content-head {
+//         width: 125px;
+//         height: 125px;
+//     }
+
+//     .form__content-head-registration {
+//         width: 100px;
+//         height: 100px;
+//     }
+
+//     /* .input__field {
+//         width: 220px;
+//     } */
+
+//     .form__content-registration {
+//         height: 620px;
+//         margin: 50px 0;
+//     }
+
+//     .notification {
+//         bottom: 20px;
+//     }      
+// }

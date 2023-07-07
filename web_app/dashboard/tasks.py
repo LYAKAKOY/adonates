@@ -17,16 +17,16 @@ def top_donations(username: str) -> List[Dict]:
 
 
 @shared_task
-def statistics_for_last_five_months(username: str) -> List[Dict]:
+def statistics_for_last_six_months(username: str) -> List[Dict]:
     current_time = datetime.now()
-    donates_for_last_five_months = []
-    for month in range(int((current_time - relativedelta(months=4)).month),
+    donates_for_last_six_months = []
+    for month in range(int((current_time - relativedelta(months=5)).month),
                        int((current_time + relativedelta(months=1)).month)):
         month_sum = DonateModel.objects.filter(
             streamer__user__username=username, payment__status='succeeded',
             payment__payment_date__month=month).aggregate(sum=Sum('payment__payment_sum'))['sum'] or 0
-        donates_for_last_five_months.append({
+        donates_for_last_six_months.append({
             'month': _(calendar.month_name[month]),
             'month_sum': month_sum,
         })
-    return donates_for_last_five_months
+    return donates_for_last_six_months

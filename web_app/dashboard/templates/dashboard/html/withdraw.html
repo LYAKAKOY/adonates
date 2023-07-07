@@ -84,6 +84,13 @@
             </div>
         </div>
     </div>
+        {% if redirect == 'http://localhost:8000/withdraw/' %}
+            {% if request.session.notification == 'succeeded' %}
+                {% include 'dashboard/html/notification_succeeded.html' %}
+            {% elif request.session.notification == 'failed' %}
+                {% include 'dashboard/html/notification_failed.html' %}
+            {% endif %}
+        {%  endif %}
     {% endblock %}
 
     {% block js %}<script src="{% static 'dashboard/js/withdraw.js' %}"></script>{% endblock %}

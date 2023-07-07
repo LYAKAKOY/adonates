@@ -9,3 +9,4 @@ social-auth-app-django==5.2.0
 yookassa==2.3.6
 python-dateutil==2.8.2
 requests~=2.31.0
+pillow==10.0.0

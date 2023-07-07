@@ -81,8 +81,8 @@
                 <section class="donates-inner">
                     {% for donate in donations %}
                     <div class="donates__item">
-                        <h1 class="donates__item-title">{{ donate.donate_sum }}Р, {{ donate.nickname }}</h1>
-                        <div class="donates__item-text"> <p>{{ donate.message }}</p></div>
+                        <h1 class="donates__item-title"> Сумма: {{ donate.donate_sum }}Р,  Никнейм: {{ donate.nickname }}</h1>
+                        <div class="donates__item-text"> <p>{{ donate.message|truncatechars:130 }}</p></div>
                     </div>
                     {%  endfor %}
                 </section>
@@ -92,4 +92,4 @@
 
 
 
-    {% block js %}<script src="{% static 'dashboard/js/dashboard.js' %}"></script>{% endblock %}
+    {% block js %}<script src="{% static 'dashboard/js/statistics.js' %}"></script>{% endblock %}

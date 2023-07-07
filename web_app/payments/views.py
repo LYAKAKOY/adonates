@@ -25,7 +25,7 @@ def payout_notification(request):
         request.session['notification'] = 'succeeded'
         return redirect(reverse('withdraw'))
     else:
-        request.session['notification'] = 'zero'
+        request.session['notification'] = 'failed'
         return redirect(reverse('withdraw'))
 
 

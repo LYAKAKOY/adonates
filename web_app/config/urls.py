@@ -23,5 +23,5 @@ urlpatterns = [
     path('', include('users.urls')),
     path('', include('social_django.urls', namespace='social')),
     path('', include('dashboard.urls')),
-    path('', include('payments.urls'))
+    path('', include('payments.urls')),
 ]

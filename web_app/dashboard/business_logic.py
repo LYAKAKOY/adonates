@@ -22,12 +22,17 @@ def dashboard_logic(request: HttpRequest) -> dict:
     return result
 
 
+def profile_logic():
+    pass
+
+
 def withdraw_logic(request: HttpRequest) -> dict:
     result = {}
     task = top_donations.delay(request.user.username)
     result_task = AsyncResult(task.task_id)
     result['withdrawals'] = PayoutModel.objects.filter(streamer=request.user).filter(status='succeeded')
     result['top_donations'] = result_task.get()
+    result['redirect'] = request.META.get('HTTP_REFERER', None)
     return result
 
 

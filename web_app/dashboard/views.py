@@ -38,8 +38,15 @@ class AllDonationsView(DetailView):
     template_name = 'dashboard/html/donations.html'
     context_object_name = 'donations'
 
+    def get_context_data(self, **kwargs):
+        context = {}
+        if self.object:
+            context.update(withdraw_logic(self.request))
+        context.update(kwargs)
+        return super().get_context_data(**context)
+
     def get_object(self, queryset=None):
-        return DonateModel.objects.filter(streamer__user=self.request.user)
+        return DonateModel.objects.filter(streamer__user=self.request.user, payment__status='succeeded')
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')

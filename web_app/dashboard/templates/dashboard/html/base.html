@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block style %}{% endblock %}
+    <title>Profile</title>
+    {% block css %}{% endblock %}
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>{% block title %}{% endblock %}</title>
 </head>
+<body>
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <div class="logo__name"><a href="/">adonates</a></div>
+                <div class="logo__name">adonates</div>
             </div>
             <div class="burgerside" id="btnside">
                 <div class="line1"></div>
@@ -21,7 +20,30 @@
             </div>
         </div>
         <ul class="nav_list">
-            {% block navigator %}{% endblock %}
+            <li>
+                <a href="{% url 'profile' %}">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Профиль</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'statistics' %}">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="links_name">Панель</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'donations' %}">
+                    <i class='bx bx-donate-heart'></i>
+                    <span class="links_name">Донаты</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'withdraw' %}">
+                    <i class='bx bx-money-withdraw'></i>
+                    <span class="links_name">Вывод</span>
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -29,6 +51,7 @@
         {% block content %}{% endblock %}
     </section>
 
-    <script src="{% static 'dashboard/js/dashboard.js' %}"></script>
+    {% block js %}{% endblock %}
+
 </body>
 </html>

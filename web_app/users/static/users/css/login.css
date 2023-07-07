@@ -131,6 +131,11 @@ h1, h2, h3, h4, h5, h6 {
   height: 60px;
 }
 
+.form__social-item:nth-child(2) img {
+  width: 100px;
+  height: 60px;
+}
+
 .form__important-text {
   margin: 30px 50px 0 50px;
   text-align: center;

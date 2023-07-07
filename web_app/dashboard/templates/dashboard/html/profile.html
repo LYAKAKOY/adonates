@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends 'dashboard/html/base.html' %}{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'dashboard/css/statistics.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/profile.css' %}">
+{% endblock %}
+{% block content %}
+        <section class="profile">
+            <div class="profile__intro">
+                <div class="profile__main">
+                    <div class="profile__img">
+                        <img src="{% static 'users/pictures/avatar-example.jpg' %}" alt="">
+                    </div>
+                    <div class="profile__info">
+                        <div class="profile__nick">PAnanasik</div>
+                        <div class="profile__mp">
+                            <div class="profile__prof"><i class='bx bxl-telegram' ></i> Стример</div>
+                        </div>
+                        <div class="profile__achiv">
+                            <div class="achiv__text">1 год</div>
+                            <div class="achiv__text">миллионер</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rectangles">
+                    <div class="rectangle__item-first"></div>
+                    <div class="rectangle__item-second"></div>
+                    <div class="rectangle__item-third"></div>
+                </div>
+            </div>
+            <div class="profile__group">
+                <div class="profile__purposes">
+                    <div class="purpose">
+                        <h1 class="purpose-title title">Активная цель</h1>
+                        <div class="purpose-inner">
+                            <div class="purpose__circle-outer">
+                                <div class="purpose__circle-inner">
+                                    <div class="purpose__circle-inner-text">18492Р/</div>
+                                    <div class="purpose__circle-inner-text">28931Р</div>
+                                </div>
+                            </div>
+                            <a href="" class="purpose-button button">Задать цель</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile__donate">
+                    <h1 class="title">Важное</h1>
+                    <div class="profile__donate-inner">
+                        <div class="profile__donate-text">
+                            <h1 class="subtitle">Ссылка на донат</h1>
+                            <a href="#" class="subtitle-change">Изменить</a>
+                        </div>
+                        <input type="text" class="donate__input" placeholder="http://localhost:8000/donate/lyakakoy" disabled>
+                        <div class="donate__last-container">
+                            <div class="subtitle">Последнее изменение</div>
+                            <p class="donate__last" style="font-size: 14px;">Пока здесь ничего нет :(</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+{% endblock %}
+
+
+{% block js %}<script src="{% static 'dashboard/js/profile.js' %}"></script>{% endblock %}

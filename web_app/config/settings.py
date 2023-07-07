@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
 
     'social_django',
+
 ]
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'

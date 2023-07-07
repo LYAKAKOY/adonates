@@ -1,22 +1,7 @@
 {% extends 'dashboard/html/base.html' %}{% load static %}
-{% block style %}<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">{% endblock %}
-{% block title %}Статистика{% endblock %}
-{% block navigator %}
-<a href="{% url 'statistics' %}">
-  <li class="highlight">
-    <i class='bx bxs-dashboard'></i>
-    <span class="links_name">Панель</span>
-  </li>
-</a>
-<a href="{% url 'withdraw' %}">
-  <li>
-    <i class='bx bx-money-withdraw'></i>
-    <span class="links_name" >Вывод</span>
-  </li>
-</a>
-{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'dashboard/css/statistics.css' %}">{% endblock %}
 {% block content %}
-<section class="intro">
+        <section class="intro">
             <div class="intro__inner">
                 <div class="intro__text">
                     Здравствуйте,
@@ -43,7 +28,8 @@
                         </div>
                         <div class="diagram">
                             <div class="diagram__inner">
-                                <div class="diagram__item"></div>
+                                <div class="diagram__item">
+                                </div>
                                 <div class="diagram__item"></div>
                                 <div class="diagram__item"></div>
                                 <div class="diagram__item"></div>
@@ -62,30 +48,30 @@
                             </div>
                         </div>
                     </section>
-                </section>
+                </section> 
                 <section class="further-content">
                     <section class="purpose">
                         <h1 class="purpose-title title">Активная цель</h1>
                         <section class="purpose-inner">
                             <div class="purpose__circle-outer">
                                 <div class="purpose__circle-inner">
-                                    <div class="purpose__circle-inner-text">{{ account.balance }}/</div>
-                                    <div class="purpose__circle-inner-text">{{ account.goal }}</div>
+                                    <div class="purpose__circle-inner-text">{{ account.balance }}P/</div>
+                                    <div class="purpose__circle-inner-text">{{ account.goal }}Р</div>
                                 </div>
                             </div>
                         </section>
                     </section>
                     <section class="stats">
-                        <h1 class="stats-title title">Донатов (за последние 5 месяцев)</h1>
+                        <h1 class="stats-title title">Сумма донатов (за последние 5 месяцев)</h1>
                         <section class="stats-inner">
-                            {% for donate in statistics_by_months %}
                             <div class="stats-inner__info">
+                                {% for donate in statistics_by_months %}
                                 <div class="stats-inner-item">
                                     <div class="stats-inner-item-month">{{ donate.month }}</div>
                                     <div class="stats-inner-item-cash">{{ donate.month_sum }}Р</div>
                                 </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
                         </section>
                     </section>
                 </section>
@@ -102,4 +88,8 @@
                 </section>
             </section>
         </section>
-{% endblock %}
+    {% endblock %}
+
+
+
+    {% block js %}<script src="{% static 'dashboard/js/dashboard.js' %}"></script>{% endblock %}

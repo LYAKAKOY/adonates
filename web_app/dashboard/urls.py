@@ -1,9 +1,11 @@
 from django.urls import path
-from .views import StatisticsView, WithdrawView
+from .views import StatisticsView, WithdrawView, AllDonationsView, ProfileStreamerView
 import dashboard.api as API
 
 urlpatterns = [
+    path('profile/', ProfileStreamerView.as_view(), name='profile'),
     path('statistics/', StatisticsView.as_view(), name='statistics'),
+    path('donations/', AllDonationsView.as_view(), name='donations'),
     path('withdraw/', WithdrawView.as_view(), name='withdraw'),
     path('api/v1/streamers/', API.AccountsDonationsApiView.as_view()),
     path('api/v1/donates/', API.DonatesInfoApiView.as_view()),

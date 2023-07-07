@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'payments/css/donate.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <section class="wrapper">
+        <section class="perehod-menu">
+            <div class="left__info">
+                <div class="left__info-header">
+                    <div class="title">Оплата</div>
+                    <div class="subtitle">Последний шаг</div>
+                </div>
+                <div class="left__info-main">
+                    <div class="input__subtitle">Сумма к оплате</div>
+                    <input type="text" name="" id="newnick__input" class="main__input"
+                           value="{{ payment.amount.value }}{{ payment.amount.currency }}" disabled>
+                    <div class="left__info-navigation">
+                        <a href="{{ payment.confirmation.confirmation_url }}">
+                            <button class="left__info-button">Оплатить</button>
+                        </a>
+                        <div class="back">
+                            <a href="{{ previous_redirect }}">
+                                Назад
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="right__info">
+                <div class="streamer__profile">
+                    <img src="{% static 'payments/pictures/avatar-example.jpg' %}" alt="">
+                    <div class="title">PAnanasik</div>
+                    <div class="subtitle">этот стример получит ваш донат</div>
+                </div>
+            </div>
+        </section>
+    </section>
+</body>
+</html>

@@ -1,21 +1,6 @@
 {% extends 'dashboard/html/base.html' %}{% load static %}
-{% block style %}<link rel="stylesheet" href="{% static 'dashboard/css/withdraw.css' %}">{% endblock %}
-{% block title %}Вывод средств{% endblock %}
-{% block navigator %}
-<a href="{% url 'statistics' %}">
-    <li>
-        <i class='bx bxs-dashboard'></i>
-        <span class="links_name">Панель</span>
-    </li>
-</a>
-<a href="{% url 'withdraw' %}">
-    <li class="highlight">
-        <i class='bx bx-money-withdraw'></i>
-        <span class="links_name" >Вывод</span>
-    </li>
-</a>
-{% endblock %}
-{% block content %}
+{% block css %}<link rel="stylesheet" href="{% static 'dashboard/css/withdraw.css' %}">{% endblock %}
+    {% block content %}
         <section class="general-container">
             <section class="important__info">
                 <section class="balance">
@@ -30,24 +15,26 @@
                         </div>
                     </div>
                 </section>
+
                 <section class="withdraw-method">
                     <div class="withdraw__title title">Способ вывода</div>
                     <div class="withdraw__inner">
                         <div class="withdraw__text">
                             Вы еще не добавили никакой <br> способ вывода
-                            <a href="" class="withdraw__text-button button">Добавить</a>
+                            <a href="#" class="withdraw__text-button button">Добавить</a>
                         </div>
                     </div>
                 </section>
-            </section>
+            </section> 
+
 
             <section class="cash">
                 <section class="topdon">
                     <div class="topdon__title title"> Топ донатеров </div>
                     <div class="topdon__inner">
-                        {% for donate in top_donations %}
+                      {% for donate in top_donations %}
                        <div class="topdon__item">
-                            <div class="topdon__item-avatar"><img src="{% static 'dashboard/pictures/avatar-example.jpg' %}" alt=""></div>
+                            <div class="topdon__item-avatar"><img src="{% static 'users/pictures/avatar-example.jpg' %}" alt=""></div>
                             <div class="topdon__item-info">
                                 <div class="topdon__info-nick">{{ donate.nickname }}</div>
                                 <div class="topdon__info-cash">{{ donate.total_donated_sum }}Р</div>
@@ -70,4 +57,33 @@
                 </div>
             </section>
         </section>
-{% endblock %}
+    </section>
+
+    <div class="modal-window">
+        <div class="modal-window-header">
+            <div class="modal-window-header-text">adonates</div>  
+            <div class="modal-window-close"><i class='bx bx-x'></i></div>
+        </div>
+        <div class="modal-window-main">
+            <div class="main__field">
+                <div class="subtitle">Платежная система</div>
+                <select name="select" size="1" class="selection" onchange='findOption(this)'>
+                    <option selected value="s1">ЮMoney</option>
+                    <option value="s2">Банковская карта</option>
+                    <option value="s3">СБП</option>
+                </select>
+                <div class="subtitle">Минимальная сумма вывода:</div>
+                <input class="min-cash inp_cash" value = "1Р" disabled>
+                <div class="subtitle">Максимальная сумма вывода:</div>
+                <input class="max-cash inp_cash" value = "15000Р" disabled>
+                <div class="subtitle">Комиссия:</div>
+                <input class="max-cash inp_cash" value = "2,2%" disabled>
+                <div class="subtitle">Номер кошелька:</div>
+                <input class="max-cash inp_cash" placeholder="201831893" style="border: 1px solid rgba(255, 255, 255, 1);">
+                <button class="save">Сохранить</button>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block js %}<script src="{% static 'dashboard/js/withdraw.js' %}"></script>{% endblock %}

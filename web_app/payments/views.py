@@ -14,7 +14,9 @@ def payment_confirm(request):
     payment = payment_yoo.get_payment(request.GET.get('donate_id'))
     if payment.status == 'succeeded':
         return HttpResponseForbidden('Платеж успешно произведен')
-    return render(request, 'payments/html/payment_confirm.html', {'payment': payment})
+    previous_redirect = request.META.get('HTTP_REFERER')
+    return render(request, 'payments/html/confirm_donate.html', {'payment': payment,
+                                                                 'previous_redirect': previous_redirect})
 
 
 def payout_notification(request):
@@ -40,4 +42,4 @@ def addDonate(request, username):
     else:
         form = DonateForm()
 
-    return render(request, 'payments/html/payment.html', {'form': form, 'streamer': username})
+    return render(request, 'payments/html/donate.html', {'form': form, 'streamer': username})

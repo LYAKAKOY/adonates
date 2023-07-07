@@ -1,15 +1,15 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'users/css/style.css' %}">
-    <title>Добро пожаловать!</title>
+    <title>Intro page</title>
 </head>
 <body>
-    <div class="wrapper">
+    <div class="wrapper"> 
         <div class="header">
             <div class="header__container">
                 <div class="header__item">
@@ -38,7 +38,7 @@
                 <div class="video">
                     <div class="video__filler"></div>
                     <video loop muted autoplay preload="auto" class="video__item">
-                        <source src = "{% static 'users/video/intro-video.webm' %}" type="video/webm">
+                        <source src="{% static 'users/video/intro-video.mp4' %}" type="video/webm">
                     </video>
                 </div>
                 <div class="intro__inner">
@@ -102,7 +102,10 @@
                     <div class="about__instrument-inner platform__inner-about">
                         <div class="about__instrument-text platform__text-about">
                             <div class="about__instrument-title platform__inner-about-title title">Лучший инструмент стримера</div>
-                            <div class="about__instrument-subtitle platform__inner-about-subtitle subtitle">инструмент прост и легок в использовании, а наша техподдержка поможет при случае возникновения вопросов</div>
+                            <div class="about__instrument-subtitle platform__inner-about-subtitle subtitle">
+                                инструмент прост и легок в использовании, а главная страница покажет вам
+                                подробную статистику о донатах и продвижению по цели
+                            </div>
                         </div>
                         <div class="about__instrument-img platform-section-img">
                             <img src="{% static 'users/pictures/platform.png' %}" alt="">
@@ -118,9 +121,8 @@
                         <div class="about__withdraw-text platform__text-about">
                             <div class="about__withdraw-title platform__inner-about-title title">Комфортность и легкость вывода</div>
                             <div class="about__withdraw-subtitle platform__inner-about-subtitle subtitle">
-                                инструмент прост и легок в использовании, а наша
-                                техподдержка поможет при случае возникновения
-                                вопросов
+                                выводить деньги проще простого, вы также можете отслеживать свои переводы
+                                и увидеть своих лучших донатеров
                             </div>
                         </div>
                     </div>
@@ -131,16 +133,31 @@
                         <div class="about__safety-text platform__text-about">
                             <div class="about__safety-title platform__inner-about-title title">Скорость и безопасность</div>
                             <div class="about__safety-subtitle platform__inner-about-subtitle subtitle">
-                                мы работаем с Альфа Банком - самым безопасным
-                                банком страны
+                                мы работаем с Юкасса - ваши деньги не будут потеряны
                             </div>
                         </div>
                         <div class="about__safety-img platform-section-img platform-section-alphabank">
-                            <img src="{% static 'users/pictures/adonates.png' %}" alt="">
+                            <img width="700" height="500" src="{% static 'users/icons/yookassa-logo.png' %}" alt="">
                         </div>
                     </div>
                 </section>
 
+                <!-- <section class="about__info">
+                    <div class="about__info-inner">
+                        <div class="about__info-streamers-quantity about__info-item">
+
+                                10000+ стримеров 
+                                использует adonates
+
+                        </div>
+                        <div class="about__info-cash-quantity about__info-item">
+
+                                около 1 млн рублей 
+                                выводится каждый день
+
+                        </div>
+                    </div>
+                </section> -->
 
                 <section class="about__join">
                     <div class="about__join-inner">
@@ -159,25 +176,42 @@
                             adonates
                         </div>
                         <div class="footer__rights">
-                            2022, Все права защищены
+                            2022, All rights reserved
                         </div>
                     </div>
                     <div class="footer__social">
                         <div class="footer__social-title">Мы в социальных сетях:</div>
                         <div class="footer__social-container">
-                            <a class="footer__social-item" href="#"><img src="{% static 'users/pictures/icons/icon-vk.png' %}" alt=""></a>
-                            <a class="footer__social-item" href="#"><img src="{% static 'users/pictures/icons/icon-discord.png' %}" alt=""></a>
-                            <a class="footer__social-item" href="#"><img src="{% static 'users/pictures/icons/icon-telegram.png' %}" alt=""></a>
+                            <a class="footer__social-item" href="#"><img src="{% static 'users/icons/icon-vk.png' %}" alt=""></a>
+                            <a class="footer__social-item" href="#"><img src="{% static 'users/icons/icon-discord.png' %}" alt=""></a>
+                            <a class="footer__social-item" href="#"><img src="{% static 'users/icons/icon-telegram.png' %}" alt=""></a>
                         </div>
                     </div>
                 </div>
             </footer>
 
 
-        </main>
-    </div>
+            <!-- скрытое меню -->
 
-    <script src="{% static 'users/js/main.js' %}"></script>
+            <!-- <section class="login">
+                <div class="login__inner">
+                    <div class="login__title"></div>
+                    <div class="login__list">
+                        <a href=""><i></i> Twitch</a>
+                        <a href=""><i></i> Youtube</a>
+                        <a href=""><i></i> VK</a>
+                        <a href=""><i></i> Telegram</a>
+                        <a href=""><i></i> Discord</a>
+                        <a href=""><i></i> TikTok</a>
+                    </div>    
+                </div>
+            </section> -->
+
+            <!-- конец скрытого меню -->
+        </main>
+    </div> <!--- /wrapper --->
+
+    <script src="{% static 'users/js/greet_page.js' %}"></script>
 
 </body>
 </html>

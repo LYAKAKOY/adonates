@@ -7,7 +7,7 @@ from django.http import HttpRequest
 from payments.models import PayoutModel
 from users.models import DonateModel
 from .tasks import statistics_for_last_six_months, top_donations
-
+from .forms import PayoutForm
 
 def dashboard_logic(request: HttpRequest) -> dict:
     result = {}
@@ -33,7 +33,7 @@ def withdraw_logic(request: HttpRequest) -> dict:
     result['withdrawals'] = PayoutModel.objects.filter(streamer=request.user).filter(
         status='succeeded').order_by('-payout_date')[:4]
     result['top_donations'] = result_task.get()
-    result['redirect'] = request.META.get('HTTP_REFERER', None)
+    result['form'] = PayoutForm()
     return result
 
 

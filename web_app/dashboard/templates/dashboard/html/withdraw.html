@@ -67,12 +67,10 @@
         </div>
         <div class="modal-window-main">
             <div class="main__field">
+                <form action="/" method="post">
+                    {% csrf_token %}
                 <div class="subtitle">Платежная система</div>
-                <select name="select" size="1" class="selection" onchange='findOption(this)'>
-                    <option selected value="s1">ЮMoney</option>
-                    <option value="s2">Банковская карта</option>
-                    <option value="s3">СБП</option>
-                </select>
+                    {{ form.payout_type }}
                 <div class="subtitle">Минимальная сумма вывода:</div>
                 <input class="min-cash inp_cash" value = "1Р" disabled>
                 <div class="subtitle">Максимальная сумма вывода:</div>
@@ -80,8 +78,9 @@
                 <div class="subtitle">Комиссия:</div>
                 <input class="max-cash inp_cash" value = "2,2%" disabled>
                 <div class="subtitle">Номер кошелька:</div>
-                <input class="max-cash inp_cash" placeholder="201831893" style="border: 1px solid rgba(255, 255, 255, 1);">
+                    {{ form.number_card }}
                 <button class="save">Сохранить</button>
+                </form>
             </div>
         </div>
     </div>

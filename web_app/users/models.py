@@ -2,6 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from payments.models import PaymentModel
 
+type_card = [
+    ('YouMoney', 'ЮMoney'),
+    ('Банковская карта', 'Банковская карта'),
+    ('СБП', 'СБП')
+]
+
 
 class DonateModel(models.Model):
     payment = models.OneToOneField(PaymentModel, on_delete=models.PROTECT)
@@ -23,3 +29,10 @@ class StreamerModel(models.Model):
 
     def __str__(self):
         return f'{self.user.username}'
+
+
+class CardStreamer(models.Model):
+    streamer = models.ForeignKey(StreamerModel, verbose_name='Стример', related_name='streamerCard',
+                                 on_delete=models.PROTECT)
+    type_payout = models.CharField(verbose_name='Способ вывода', choices=type_card, max_length=16)
+    number_card = models.IntegerField(verbose_name='Номер карты', unique=True)

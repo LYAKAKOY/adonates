@@ -9,6 +9,7 @@ from users.models import DonateModel
 from .tasks import statistics_for_last_six_months, top_donations
 from .forms import PayoutForm
 
+
 def dashboard_logic(request: HttpRequest) -> dict:
     result = {}
     statistics_by_months = statistics_for_last_six_months.delay(request.user.username)

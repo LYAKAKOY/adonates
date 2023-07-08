@@ -67,10 +67,10 @@
         </div>
         <div class="modal-window-main">
             <div class="main__field">
-                <form action="/" method="post">
+                <form action="{% url 'create_payout' %}" method="post">
                     {% csrf_token %}
                 <div class="subtitle">Платежная система</div>
-                    {{ form.payout_type }}
+                    {{ form.type_payout }}
                 <div class="subtitle">Минимальная сумма вывода:</div>
                 <input class="min-cash inp_cash" value = "1Р" disabled>
                 <div class="subtitle">Максимальная сумма вывода:</div>

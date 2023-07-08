@@ -1,4 +1,5 @@
 {% extends 'dashboard/html/base.html' %}{% load static %}
+{% block title %}Все донаты{% endblock %}
 {% block css %}<link rel="stylesheet" href="{% static 'dashboard/css/donations.css' %}">{% endblock %}
     {% block content %}
         <section class="donates">
@@ -6,7 +7,8 @@
             <section class="donates-inner">
                 {% for donate in donations %}
                 <div class="donates__item">
-                    <h1 class="donates__item-title">{{ donate.payment.payment_sum }}Р, {{ donate.nickname }}</h1>
+                    <h1 class="donates__item-title">
+                        Сумма: {{ donate.payment.payment_sum }}Р, Никнейм: {{ donate.nickname }}</h1>
                     <div class="donates__item-text">
                         {{ donate.message }}
                     </div>

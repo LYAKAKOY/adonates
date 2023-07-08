@@ -8,5 +8,5 @@ from users.models import StreamerModel
 def set_balance_zero(sender, instance: PayoutModel, created: bool, **kwargs) -> None:
     if created and instance.status == 'succeeded':
         streamer = StreamerModel.objects.get(user=instance.streamer)
-        streamer.balance = 0
+        streamer.balance = 0.00
         streamer.save()

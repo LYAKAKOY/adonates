@@ -293,10 +293,9 @@ h1, h2, h3, h4, h5, h6 {
 .cash__inner {
   padding: 0 30px;
   width: 100%;
-  min-height: 300px;
-  max-height: 560px;
+  max-height: 315px;
   height: 100%;
-  border-radius: 12px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   background: #fbfbfb;
@@ -406,9 +405,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .withdraw__inner {
   width: 100%;
-  height: 300px;
+  height: 315px;
   background: #fbfbfb;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .withdraw__text {
@@ -461,10 +460,10 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   min-height: 200px;
   background: #fbfbfb;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 30px;
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
   align-items: center;
   overflow-x: auto;
 }

@@ -599,7 +599,7 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 0;
   }
   .diagram__item.selected::before {
-    content: "13000Р 01.11";
+    content: "";
     display: flex;
     justify-content: center;
     align-items: center;

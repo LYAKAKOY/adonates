@@ -4,7 +4,8 @@ let closeBtn = document.querySelector('.modal-window-close');
 let modalWindow = document.querySelector('.modal-window');
 let modalBtn = document.querySelector('.withdraw__text-button');
 let saveBtn = document.querySelector('.save');
-let select = document.querySelector('.selection')
+let payoutBtn = document.querySelector('.withdraw-button.button')
+let balance = document.querySelector('.balance__info')
 
 function createFillerModal() {
     let elem = document.createElement('div');
@@ -102,3 +103,33 @@ saveBtn.onclick = function() {
     modalWindow.style.display = 'none';
     fillerModal.remove();
 }
+
+const Payout = function () {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/payout/', true);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            const payout_status = response.payout_status
+            console.log(payout_status)
+            if (payout_status !== 'succeeded') {
+                alert('Простите что-то пошло не так, либо на вашем балансе 0 рублей 🤔')
+            }
+            else {
+                alert('Успешный вывод средств. Деньги придут в течении 15 минут 🤑')
+                balance.innerHTML = 'Ваш баланс: 0,00Р' +
+                    '<a href="#" class="withdraw-button button" onclick="Payout()">Вывести</a>'
+            }
+
+        }
+    }
+
+    xhr.onerror = function() {
+        console.error('Произошла ошибка сети');
+    };
+
+    xhr.send();
+}
+
+payoutBtn.onclick = Payout

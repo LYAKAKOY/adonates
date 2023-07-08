@@ -1,4 +1,5 @@
 {% extends 'dashboard/html/base.html' %}{% load static %}
+{% block title %}Вывод{% endblock %}
 {% block css %}<link rel="stylesheet" href="{% static 'dashboard/css/withdraw.css' %}">{% endblock %}
     {% block content %}
         <section class="general-container">
@@ -8,7 +9,7 @@
                     <div class="balance__inner">
                         <div class="balance__info">
                             Ваш баланс: {{ account.balance }}Р
-                            <a href="{% url 'payout_notification' %}" class="withdraw-button button">Вывести</a>
+                            <a href="#" class="withdraw-button button" onclick="Payout()">Вывести</a>
                         </div>
                         <div class="rectangle">
                             <div class="rectangle__item-first"></div>
@@ -36,7 +37,7 @@
                        <div class="topdon__item">
                             <div class="topdon__item-avatar"><img src="{% static 'users/pictures/avatar-example.jpg' %}" alt=""></div>
                             <div class="topdon__item-info">
-                                <div class="topdon__info-nick">{{ donate.nickname }}</div>
+                                <div class="topdon__info-nick">{{ donate.nickname|truncatechars:12 }}</div>
                                 <div class="topdon__info-cash">{{ donate.total_donated_sum }}Р</div>
                             </div>
                        </div>
@@ -84,13 +85,6 @@
             </div>
         </div>
     </div>
-        {% if redirect == 'http://localhost:8000/withdraw/' %}
-            {% if request.session.notification == 'succeeded' %}
-                {% include 'dashboard/html/notification_succeeded.html' %}
-            {% elif request.session.notification == 'failed' %}
-                {% include 'dashboard/html/notification_failed.html' %}
-            {% endif %}
-        {%  endif %}
     {% endblock %}
 
     {% block js %}<script src="{% static 'dashboard/js/withdraw.js' %}"></script>{% endblock %}

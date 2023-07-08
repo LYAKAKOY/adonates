@@ -2,10 +2,14 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import permissions
+from rest_framework.response import Response
+
 from config import settings
 from .forms import DonateForm
 from .yookassa_payment import YouKassaPayment
 from .business_logic import payout_logic, payment_logic
+from rest_framework.views import APIView
 
 
 @csrf_exempt
@@ -19,14 +23,25 @@ def payment_confirm(request):
                                                                  'previous_redirect': previous_redirect})
 
 
-def payout_notification(request):
-    result = payout_logic(request)
-    if result:
-        request.session['notification'] = 'succeeded'
-        return redirect(reverse('withdraw'))
-    else:
-        request.session['notification'] = 'failed'
-        return redirect(reverse('withdraw'))
+class PayoutApiView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        payout_status = payout_logic(request)
+        data = {
+            'payout_status': payout_status
+        }
+        return Response(data)
+
+
+# def payout_notification(request):
+#     result = payout_logic(request)
+#     if result:
+#         request.session['notification'] = 'succeeded'
+#         return redirect(reverse('withdraw'))
+#     else:
+#         request.session['notification'] = 'failed'
+#         return redirect(reverse('withdraw'))
 
 
 def addDonate(request, username):

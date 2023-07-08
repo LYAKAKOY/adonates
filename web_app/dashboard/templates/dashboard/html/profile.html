@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% extends 'dashboard/html/base.html' %}{% load static %}
+{% block title %}{{ account.user.username }}{% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'dashboard/css/statistics.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard/css/profile.css' %}">
@@ -12,7 +13,7 @@
                         <img src="{% static 'users/pictures/avatar-example.jpg' %}" alt="">
                     </div>
                     <div class="profile__info">
-                        <div class="profile__nick">PAnanasik</div>
+                        <div class="profile__nick">{{ account.user.username }}</div>
                         <div class="profile__mp">
                             <div class="profile__prof"><i class='bx bxl-telegram' ></i> Стример</div>
                         </div>
@@ -35,8 +36,8 @@
                         <div class="purpose-inner">
                             <div class="purpose__circle-outer">
                                 <div class="purpose__circle-inner">
-                                    <div class="purpose__circle-inner-text">18492Р/</div>
-                                    <div class="purpose__circle-inner-text">28931Р</div>
+                                    <div class="purpose__circle-inner-text">{{ account.balance }}Р/</div>
+                                    <div class="purpose__circle-inner-text">{{ account.goal }}Р</div>
                                 </div>
                             </div>
                             <a href="" class="purpose-button button">Задать цель</a>
@@ -49,7 +50,8 @@
                         <div class="profile__donate-text">
                             <h1 class="subtitle">Ссылка на донат</h1>
                         </div>
-                        <input type="text" class="donate__input" placeholder="http://localhost:8000/donate/lyakakoy" disabled>
+                        <input type="text" class="donate__input"
+                               placeholder="http://localhost:8000/donate/{{ account.user.username }}" disabled>
                         <div class="donate__last-container">
                             <div class="subtitle">Последнее изменение</div>
                             <p class="donate__last" style="font-size: 14px;">Пока здесь ничего нет :(</p>

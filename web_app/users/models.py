@@ -31,11 +31,11 @@ class StreamerModel(models.Model):
         return f'{self.user.username}'
 
 
-class CardStreamer(models.Model):
+class StreamerCard(models.Model):
     streamer = models.ForeignKey(StreamerModel, verbose_name='Стример', related_name='streamerCard',
                                  on_delete=models.PROTECT)
     type_payout = models.CharField(verbose_name='Способ вывода', choices=type_card, max_length=16)
-    number_card = models.IntegerField(verbose_name='Номер карты', unique=True)
+    number_card = models.DecimalField(verbose_name='Номер карты', unique=True, max_digits=20, decimal_places=0)
 
     def __str__(self):
         return f'{self.streamer.user.username}: {self.type_payout}'

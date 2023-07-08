@@ -5,10 +5,10 @@ from payments.forms import DonateForm
 from payments.models import PayoutModel, PaymentModel
 from payments.yookassa_payment import YouKassaPayment
 from payments.yookassa_payout import YouKassaPayout
-from users.models import DonateModel, StreamerModel
+from users.models import DonateModel, StreamerModel, StreamerCard
 
 type_card = [
-    ('YouMoney', 'ЮMoney'),
+    ('ЮMoney', 'ЮMoney'),
     ('Банковская карта', 'Банковская карта'),
     ('СБП', 'СБП')
 ]
@@ -21,7 +21,8 @@ def payout_logic(request: HttpRequest) -> str:
     if balance == 0:
         return 'balance is zero'
     payout_yoo = YouKassaPayout(settings.YOOKASSA_AGENT_ID, settings.YOOKASSA_PAYOUT_SECRET_KEY)
-    payout = payout_yoo.create_payout_yookassa(balance, 41001614575714)
+    payout = payout_yoo.create_payout_yookassa(balance,
+                                               StreamerCard.objects.get(streamer__user=request.user).number_card)
     for donate in donates:
         donate.withdrawn = True
         donate.save()

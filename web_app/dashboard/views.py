@@ -1,9 +1,14 @@
+
+
 from django.contrib.auth.decorators import login_required
-from users.models import StreamerModel, DonateModel, CardStreamer
+from django.shortcuts import redirect
+from django.urls import reverse
+
+from users.models import StreamerModel, DonateModel, StreamerCard
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from .business_logic import dashboard_logic, withdraw_logic
-from .forms import PayoutForm
+from .forms import PayoutAddForm
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
@@ -63,8 +68,10 @@ class WithdrawView(DetailView):
 @login_required
 def create_payout_method(request):
     if request.method == 'POST':
-        form = PayoutForm(request.POST)
+        form = PayoutAddForm(request.POST)
         if form.is_valid():
-            CardStreamer.objects.create(streamer=StreamerModel.objects.get(user=request.user),
+            StreamerCard.objects.create(streamer=StreamerModel.objects.get(user=request.user),
                                         type_payout=form.cleaned_data['type_payout'],
                                         number_card=form.cleaned_data['number_card'])
+
+    return redirect(reverse('withdraw'))

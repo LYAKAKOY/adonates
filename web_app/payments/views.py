@@ -34,16 +34,6 @@ class PayoutApiView(APIView):
         return Response(data)
 
 
-# def payout_notification(request):
-#     result = payout_logic(request)
-#     if result:
-#         request.session['notification'] = 'succeeded'
-#         return redirect(reverse('withdraw'))
-#     else:
-#         request.session['notification'] = 'failed'
-#         return redirect(reverse('withdraw'))
-
-
 def addDonate(request, username):
     request.session['person'] = request.session.session_key
     if request.method == 'POST':

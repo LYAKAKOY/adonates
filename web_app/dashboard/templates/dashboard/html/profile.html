@@ -10,7 +10,7 @@
             <div class="profile__intro">
                 <div class="profile__main">
                     <div class="profile__img">
-                        <img src="{% static 'users/pictures/avatar-example.jpg' %}" alt="">
+                        <img src="{{ account.avatar.url }}" alt="">
                     </div>
                     <div class="profile__info">
                         <div class="profile__nick">{{ account.user.username }}</div>

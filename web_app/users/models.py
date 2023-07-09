@@ -22,10 +22,10 @@ class DonateModel(models.Model):
 
 class StreamerModel(models.Model):
     user = models.OneToOneField(User, related_name='user', verbose_name='Пользователь', on_delete=models.PROTECT)
-    avatar = models.ImageField(verbose_name='Аватарка', default='./static/pictures/avatar-example.jpg')
+    avatar = models.ImageField(verbose_name='Аватарка', default='default_profile_picture.png')
     balance = models.DecimalField(verbose_name='Общая сумма', max_digits=10, decimal_places=2, default=0)
     count_donations = models.IntegerField(verbose_name='Количество донатов', default=0)
-    goal = models.DecimalField(verbose_name='Цель', max_digits=10, decimal_places=0, default=0)
+    goal = models.DecimalField(verbose_name='Цель', max_digits=10, decimal_places=0, default=0.00)
 
     def __str__(self):
         return f'{self.user.username}'

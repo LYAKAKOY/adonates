@@ -1,9 +1,6 @@
-
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse
-
 from users.models import StreamerModel, DonateModel, StreamerCard
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView

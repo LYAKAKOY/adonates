@@ -41,8 +41,8 @@
             </div>
             <div class="right__info">
                 <div class="streamer__profile">
-                    <img src="{% static 'payments/pictures/avatar-example.jpg' %}" alt="">
-                    <div class="title">{{ streamer }}</div>
+                    <img src="{{ streamer.avatar.url }}" alt="">
+                    <div class="title">{{ streamer.user.username }}</div>
                     <div class="subtitle">этот стример получит ваш донат</div>
                 </div>
             </div>

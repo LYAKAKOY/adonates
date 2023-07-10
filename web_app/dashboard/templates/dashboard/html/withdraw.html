@@ -35,7 +35,7 @@
                     <div class="topdon__inner">
                       {% for donate in top_donations %}
                        <div class="topdon__item">
-                            <div class="topdon__item-avatar"><img src="{% static 'users/pictures/avatar-example.jpg' %}" alt=""></div>
+                            <div class="topdon__item-avatar"><img src="{{ account.avatar.url }}" alt=""></div>
                             <div class="topdon__item-info">
                                 <div class="topdon__info-nick">{{ donate.nickname|truncatechars:12 }}</div>
                                 <div class="topdon__info-cash">{{ donate.total_donated_sum }}Р</div>

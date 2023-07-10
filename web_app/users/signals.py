@@ -4,15 +4,18 @@ from django.contrib.auth.models import User
 from .models import StreamerModel
 from .tasks import recount_total_sum
 from payments.models import PaymentModel
-from .models import DonateModel
+from .models import DonateModel, StreamerSettings
 
 
 @receiver(post_save, sender=User)
-def create_donation_account(sender: User, instance: User, created: bool, **kwargs) -> None:
+def create_streamer_account(sender: User, instance: User, created: bool, **kwargs) -> None:
     if created:
-        donation_account = StreamerModel()
-        donation_account.user = instance
-        donation_account.save()
+        streamer = StreamerModel()
+        streamer.user = instance
+        streamer.save()
+        streamer_settings = StreamerSettings()
+        streamer_settings.streamer = streamer
+        streamer_settings.save()
 
 
 @receiver(post_save, sender=DonateModel)

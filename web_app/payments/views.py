@@ -4,12 +4,12 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import permissions
 from rest_framework.response import Response
-
 from config import settings
 from .forms import DonateForm
 from .yookassa_payment import YouKassaPayment
 from .business_logic import payout_logic, payment_logic
 from rest_framework.views import APIView
+from users.models import StreamerModel
 
 
 @csrf_exempt
@@ -47,4 +47,5 @@ def addDonate(request, username):
     else:
         form = DonateForm()
 
-    return render(request, 'payments/html/donate.html', {'form': form, 'streamer': username})
+    return render(request, 'payments/html/donate.html', {'form': form,
+                                                         'streamer': StreamerModel.objects.get(user__username=username)})

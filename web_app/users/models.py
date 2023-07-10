@@ -25,15 +25,24 @@ class StreamerModel(models.Model):
     avatar = models.ImageField(verbose_name='Аватарка', default='default_profile_picture.png')
     balance = models.DecimalField(verbose_name='Общая сумма', max_digits=10, decimal_places=2, default=0)
     count_donations = models.IntegerField(verbose_name='Количество донатов', default=0)
-    goal = models.DecimalField(verbose_name='Цель', max_digits=10, decimal_places=0, default=0.00)
 
     def __str__(self):
         return f'{self.user.username}'
 
 
+class StreamerSettings(models.Model):
+    streamer = models.OneToOneField(StreamerModel, on_delete=models.CASCADE)
+    goal = models.DecimalField(verbose_name='Цель', max_digits=10, decimal_places=2, default=0.00)
+    min_sum_donate = models.DecimalField(verbose_name='Минимальная сумма доната',
+                                         max_digits=10, decimal_places=2, default=0)
+
+    def __str__(self):
+        return f'{self.streamer.user.username}'
+
+
 class StreamerCard(models.Model):
     streamer = models.ForeignKey(StreamerModel, verbose_name='Стример', related_name='streamerCard',
-                                 on_delete=models.PROTECT)
+                                 on_delete=models.CASCADE)
     type_payout = models.CharField(verbose_name='Способ вывода', choices=type_card, max_length=16)
     number_card = models.DecimalField(verbose_name='Номер карты', unique=True, max_digits=20, decimal_places=0)
 

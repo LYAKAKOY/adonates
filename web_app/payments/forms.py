@@ -1,4 +1,5 @@
 from django import forms
+from users.models import DonateModel, StreamerCard
 from config.settings import TYPE_CARD
 
 
@@ -9,6 +10,7 @@ class DonateForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea(attrs={'class': 'main__textarea'}), required=False)
 
     class Meta:
+        model = DonateModel
         fields = ['nickname', 'donated_sum', 'message']
 
 
@@ -20,4 +22,5 @@ class PayoutAddForm(forms.Form):
         'style': 'border: 1px solid rgba(255, 255, 255, 1);', 'step': 'any'}))
 
     class Meta:
+        model = StreamerCard
         fields = ['payout_type', 'number_card']

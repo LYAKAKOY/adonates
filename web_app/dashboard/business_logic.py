@@ -23,10 +23,6 @@ def dashboard_logic(request: HttpRequest) -> dict:
     return result
 
 
-def profile_logic():
-    pass
-
-
 def withdraw_logic(request: HttpRequest) -> dict:
     result = {}
     task = top_donations.delay(request.user.username)

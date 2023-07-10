@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from users.models import StreamerModel, DonateModel, StreamerCard
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from .business_logic import dashboard_logic, withdraw_logic
 from payments.forms import PayoutAddForm
+from .forms import ChangeProfileForm, ChangeSettingsForm
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
@@ -72,3 +73,23 @@ def create_payout_method(request):
                                         number_card=form.cleaned_data['number_card'])
 
     return redirect(reverse('withdraw'))
+
+
+@login_required
+def change_profile(request):
+    if request.method == 'POST':
+        form = ChangeProfileForm(request.POST)
+        if form.is_valid():
+            pass
+    form = ChangeProfileForm()
+    return render(request, 'dashboard/html/change_profile.html', {'form': form})
+
+
+@login_required
+def change_settings(request):
+    if request.method == 'POST':
+        form = ChangeSettingsForm(request.POST)
+        if form.is_valid():
+            pass
+    form = ChangeSettingsForm()
+    return render(request, 'dashboard/html/change_profile.html', {'form': form})

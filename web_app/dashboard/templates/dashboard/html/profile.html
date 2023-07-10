@@ -40,7 +40,6 @@
                                     <div class="purpose__circle-inner-text">{{ account.streamerSettings.goal }}Р</div>
                                 </div>
                             </div>
-                            <a href="" class="purpose-button button">Задать цель</a>
                         </div>
                     </div>
                 </div>
@@ -53,8 +52,12 @@
                         <input type="text" class="donate__input"
                                placeholder="http://localhost:8000/donate/{{ account.user.username }}" disabled>
                         <div class="donate__last-container">
-                            <div class="subtitle">Последнее изменение</div>
-                            <p class="donate__last" style="font-size: 14px;">Пока здесь ничего нет :(</p>
+                            <div class="subtitle">Минимальная сумма доната</div>
+                            {% if account.streamerSettings.min_sum_donate == 0.00 %}
+                                <p class="donate__last" style="font-size: 14px;">Не задано</p>
+                            {% else %}
+                                <p class="donate__last" style="font-size: 14px;">{{ account.streamerSettings.min_sum_donate }}</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

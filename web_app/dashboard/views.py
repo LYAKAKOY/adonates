@@ -5,7 +5,7 @@ from users.models import StreamerModel, DonateModel, StreamerCard
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from .business_logic import dashboard_logic, withdraw_logic
-from .forms import PayoutAddForm
+from payments.forms import PayoutAddForm
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')

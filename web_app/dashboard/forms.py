@@ -4,7 +4,7 @@ from users.models import StreamerModel, StreamerSettings
 
 class ChangeProfileForm(forms.Form):
     username = forms.CharField()
-    avatar = forms.IntegerField()
+    avatar = forms.ImageField()
 
     class Meta:
         model = StreamerModel

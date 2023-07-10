@@ -1,12 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from payments.models import PaymentModel
-
-type_card = [
-    ('ЮMoney', 'ЮMoney'),
-    ('Банковская карта', 'Банковская карта'),
-    ('СБП', 'СБП')
-]
+from config.settings import TYPE_CARD
 
 
 class DonateModel(models.Model):
@@ -44,7 +39,7 @@ class StreamerSettings(models.Model):
 class StreamerCard(models.Model):
     streamer = models.ForeignKey(StreamerModel, verbose_name='Стример', related_name='streamerCard',
                                  on_delete=models.CASCADE)
-    type_payout = models.CharField(verbose_name='Способ вывода', choices=type_card, max_length=16)
+    type_payout = models.CharField(verbose_name='Способ вывода', choices=TYPE_CARD, max_length=16)
     number_card = models.DecimalField(verbose_name='Номер карты', unique=True, max_digits=20, decimal_places=0)
 
     def __str__(self):

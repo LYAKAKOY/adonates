@@ -7,12 +7,6 @@ from payments.yookassa_payment import YouKassaPayment
 from payments.yookassa_payout import YouKassaPayout
 from users.models import DonateModel, StreamerModel, StreamerCard
 
-type_card = [
-    ('ЮMoney', 'ЮMoney'),
-    ('Банковская карта', 'Банковская карта'),
-    ('СБП', 'СБП')
-]
-
 
 def payout_logic(request: HttpRequest) -> str:
     donates = DonateModel.objects.filter(

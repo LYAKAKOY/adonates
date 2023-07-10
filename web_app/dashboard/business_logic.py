@@ -7,7 +7,7 @@ from django.http import HttpRequest
 from payments.models import PayoutModel
 from users.models import DonateModel
 from .tasks import statistics_for_last_six_months, top_donations
-from .forms import PayoutAddForm
+from payments.forms import PayoutAddForm
 
 
 def dashboard_logic(request: HttpRequest) -> dict:

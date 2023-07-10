@@ -189,3 +189,9 @@ SOCIAL_AUTH_YANDEX_OAUTH2_REDIRECT_URI = 'http://localhost:8000/complete/yandex-
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('ID_GOOGLE')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SECRET_GOOGLE_KEY')
+
+TYPE_CARD = [
+    ('ЮMoney', 'ЮMoney'),
+    ('Банковская карта', 'Банковская карта'),
+    ('СБП', 'СБП')
+]

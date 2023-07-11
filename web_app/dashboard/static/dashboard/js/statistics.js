@@ -22,8 +22,9 @@ function createMessage(elem, date, cash) {
 
     function myFunction(x) {
         if (x.matches) {
-            message.style.cssText = 
-            `position: absolute; 
+            message.style.cssText =
+            `position: absolute;
+            z-index: 100; 
             color: #0e0e0e; 
             height: 30px;
             max-width: 55px;

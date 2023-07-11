@@ -15,7 +15,13 @@
                     <div class="profile__info">
                         <div class="profile__nick">{{ account.user.username }}</div>
                         <div class="profile__mp">
-                            <div class="profile__prof"><i class='bx bxl-telegram' ></i> Стример</div>
+                            {% if backend == 'vk-oauth2' %}
+                                <div class="profile__prof"><i class='bx bxl-vk' ></i> Стример</div>
+                            {% elif backend == 'yandex-oauth2' %}
+                                <div class="profile__prof"><i class='bx bxl-yahoo' ></i> Стример</div>
+                            {% elif backend == 'google-oauth2' %}
+                                <div class="profile__prof"><i class='bx bxl-youtube' ></i> Стример</div>
+                            {% endif %}
                         </div>
                         <div class="profile__achiv">
                             <div class="achiv__text">1 год</div>

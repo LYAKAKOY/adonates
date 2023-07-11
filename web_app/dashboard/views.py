@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from social_django.models import UserSocialAuth
 from users.models import StreamerModel, DonateModel, StreamerCard
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
@@ -14,6 +15,15 @@ class ProfileStreamerView(DetailView):
     model = StreamerModel
     template_name = 'dashboard/html/profile.html'
     context_object_name = 'account'
+
+    def get_context_data(self, **kwargs):
+        context = {}
+        if self.object:
+            context.update({
+                'backend': UserSocialAuth.objects.get(user=self.request.user).provider
+            })
+        context.update(kwargs)
+        return super().get_context_data(**context)
 
     def get_object(self, queryset=None):
         return StreamerModel.objects.get(user=self.request.user)

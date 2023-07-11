@@ -58,7 +58,7 @@ function createMessage(elem, date, cash) {
     let coords = getCoords(elem);
 
     message.style.left = coords.left + "px";
-    message.style.top = coords.top - 45 + "px";
+    message.style.top = coords.top + 100 + "px";
 
     message.innerHTML = date + '<br>' + cash;
     return message;

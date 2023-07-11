@@ -5,7 +5,7 @@ from social_django.models import UserSocialAuth
 from users.models import StreamerModel, DonateModel, StreamerCard
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
-from .business_logic import dashboard_logic, withdraw_logic
+from .business_logic import statistics_logic, withdraw_logic
 from payments.forms import PayoutAddForm
 from .forms import ChangeProfileForm, ChangeSettingsForm
 
@@ -38,7 +38,7 @@ class StatisticsView(DetailView):
     def get_context_data(self, **kwargs):
         context = {}
         if self.object:
-            context.update(dashboard_logic(self.request))
+            context.update(statistics_logic(self.request))
         context.update(kwargs)
         return super().get_context_data(**context)
 
@@ -53,7 +53,8 @@ class AllDonationsView(DetailView):
     context_object_name = 'donations'
 
     def get_object(self, queryset=None):
-        return DonateModel.objects.filter(streamer__user=self.request.user, payment__status='succeeded')
+        return DonateModel.objects.filter(streamer__user=self.request.user, payment__status='succeeded').order_by(
+            '-payment__payment_date')
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')

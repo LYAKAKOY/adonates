@@ -10,7 +10,7 @@ from .tasks import statistics_for_last_six_months, top_donations
 from payments.forms import PayoutAddForm
 
 
-def dashboard_logic(request: HttpRequest) -> dict:
+def statistics_logic(request: HttpRequest) -> dict:
     result = {}
     statistics_by_months = statistics_for_last_six_months.delay(request.user.username)
     result_task = AsyncResult(statistics_by_months.task_id)

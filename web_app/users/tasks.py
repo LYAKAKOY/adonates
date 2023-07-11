@@ -4,6 +4,14 @@ from django.db.models import Sum
 from .models import StreamerModel, DonateModel
 
 
+@shared_task
+def recount_sum_goal(donate_pk: DonateModel.pk):
+    donate = DonateModel.objects.get(payment_id=donate_pk)
+    streamer = StreamerModel.objects.get(user=donate.streamer.user)
+    streamer.streamerSettings.sum_goal += donate.payment.payment_sum
+    streamer.streamerSettings.save()
+
+
 @shared_task(base=Singleton)
 def recount_total_sum(donate_pk: DonateModel.pk):
     streamer = StreamerModel.objects.get(user=DonateModel.objects.get(payment_id=donate_pk).streamer.user)

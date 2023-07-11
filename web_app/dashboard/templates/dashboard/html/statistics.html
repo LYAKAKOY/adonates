@@ -56,7 +56,7 @@
                         <section class="purpose-inner">
                             <div class="purpose__circle-outer">
                                 <div class="purpose__circle-inner">
-                                    <div class="purpose__circle-inner-text">{{ account.balance }}P/</div>
+                                    <div class="purpose__circle-inner-text">{{ account.streamerSettings.sum_goal }}P/</div>
                                     <div class="purpose__circle-inner-text">{{ account.streamerSettings.goal }}Р</div>
                                 </div>
                             </div>
@@ -93,4 +93,6 @@
 
 
 
-    {% block js %}<script src="{% static 'dashboard/js/statistics.js' %}"></script>{% endblock %}
+    {% block js %}<script type="module" src="{% static 'dashboard/js/statistics.js' %}"></script>
+        <script type="module" src="{% static 'dashboard/js/func.js' %}"></script>
+    {% endblock %}

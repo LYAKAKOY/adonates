@@ -2,9 +2,9 @@ let btnSide = document.querySelector('#btnside');
 let sidebar = document.querySelector('.sidebar');
 let closeBtn = document.querySelector('.modal-window-close');
 let modalWindow = document.querySelector('.modal-window');
-let modalBtn = document.querySelector('.withdraw__text-button');
+const withdrawTitleContainer = document.querySelector('.withdraw__title-container');
+const modalBtn = withdrawTitleContainer.querySelector('.button_withdraw');
 let saveBtn = document.querySelector('.save');
-let payoutBtn = document.querySelector('.withdraw-button.button')
 let balance = document.querySelector('.balance__info')
 
 function createFillerModal() {
@@ -132,4 +132,38 @@ const Payout = function () {
     xhr.send();
 }
 
-payoutBtn.onclick = Payout
+
+const itemsCont = document.querySelector('.withdraw__inner');
+let selectedItem;
+
+itemsCont.onclick = function(event) {
+    let target = event.target.closest('.items-container__item');
+
+    if (!target) return;
+    if (target.tagName !== 'DIV') return;
+    if (!itemsCont.contains(target)) return;
+    if (document.querySelector('.selected')) document.querySelector('.selected').classList.remove('selected');
+
+    select(target);
+
+}
+
+function select(item) {
+    if(selectedItem) {
+        selectedItem.classList.remove('selected');
+    }
+
+    selectedItem = item;
+    selectedItem.classList.add('selected');
+    if(typeof(localStorage) != "undefined"){
+        localStorage.value = selectedItem.textContent.trim();
+    }
+    // document.querySelector("form").submit();
+    console.log(localStorage)
+}
+
+if(localStorage.value) {
+    [...(itemsCont.getElementsByClassName('items-container__item'))].forEach(x => x.textContent.trim() === localStorage.value ?
+    x.classList.add('selected')
+    :  x.classList.remove('selected'))
+}

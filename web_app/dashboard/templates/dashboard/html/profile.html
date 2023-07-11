@@ -42,7 +42,7 @@
                         <div class="purpose-inner">
                             <div class="purpose__circle-outer">
                                 <div class="purpose__circle-inner">
-                                    <div class="purpose__circle-inner-text">{{ account.balance }}Р/</div>
+                                    <div class="purpose__circle-inner-text">{{ account.streamerSettings.sum_goal }}Р/</div>
                                     <div class="purpose__circle-inner-text">{{ account.streamerSettings.goal }}Р</div>
                                 </div>
                             </div>
@@ -73,4 +73,4 @@
 {% endblock %}
 
 
-{% block js %}<script src="{% static 'dashboard/js/profile.js' %}"></script>{% endblock %}
+{% block js %}<script type="module" src="{% static 'dashboard/js/profile.js' %}"></script>{% endblock %}

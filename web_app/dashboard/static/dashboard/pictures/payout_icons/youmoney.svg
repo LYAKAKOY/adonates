@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+viewBox="0 0 2032 2032"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <g id="_x0020_1">
+  <path fill="#8B3FFD" d="M623 550l0 466c0,364 297,657 660,657 362,0 659,-296 659,-657 0,-361 -297,-657 -659,-657 -366,0 -660,296 -660,657l0 490 -233 0 -300 -956 533 0zm660 711c-135,0 -246,-111 -246,-245 0,-134 111,-245 246,-245 134,0 245,111 245,245 -3,134 -111,245 -245,245z"/>
+ </g>
+</svg>

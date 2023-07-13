@@ -42,7 +42,7 @@ class StreamerCard(models.Model):
                                  on_delete=models.CASCADE)
     type_payout = models.CharField(verbose_name='Способ вывода', choices=TYPE_CARD, max_length=16)
     number_card = models.DecimalField(verbose_name='Номер карты', unique=True, max_digits=20, decimal_places=0)
-    default_payout = models.BooleanField(verbose_name='Выбранный способ вывода', default=True)
+    default_payout = models.BooleanField(verbose_name='Выбранный способ вывода', default=False)
 
     def __str__(self):
         return f'{self.streamer.user.username}: {self.type_payout}'

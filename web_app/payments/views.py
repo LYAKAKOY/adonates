@@ -23,17 +23,6 @@ def payment_confirm(request):
                                                                  'previous_redirect': previous_redirect})
 
 
-class PayoutApiView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get(self, request):
-        payout_status = payout_logic(request)
-        data = {
-            'payout_status': payout_status
-        }
-        return Response(data)
-
-
 def addDonate(request, username):
     request.session['person'] = request.session.session_key
     if request.method == 'POST':
@@ -48,4 +37,5 @@ def addDonate(request, username):
         form = DonateForm()
 
     return render(request, 'payments/html/donate.html', {'form': form,
-                                                         'streamer': StreamerModel.objects.get(user__username=username)})
+                                                         'streamer': StreamerModel.objects.get(
+                                                             user__username=username)})

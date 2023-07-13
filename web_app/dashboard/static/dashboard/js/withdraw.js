@@ -158,8 +158,25 @@ function select(item) {
     if(typeof(localStorage) != "undefined"){
         localStorage.value = selectedItem.textContent.trim();
     }
-    // document.querySelector("form").submit();
-    console.log(localStorage)
+    // console.log(selectedItem.textContent.trim())
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/payout_method/', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function() {
+    if (xhr.status === 200) {
+        const response = xhr.responseText;
+        console.log(response);
+        }
+    };
+
+    xhr.onerror = function() {
+        console.error('Произошла ошибка при отправке запроса');
+    };
+
+    const jsonData = JSON.stringify(selectedItem.textContent.trim());
+    xhr.send(jsonData);
 }
 
 if(localStorage.value) {

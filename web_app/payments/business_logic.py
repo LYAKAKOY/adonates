@@ -15,14 +15,16 @@ def payout_logic(request: HttpRequest) -> str:
     if balance == 0:
         return 'balance is zero'
     payout_yoo = YouKassaPayout(settings.YOOKASSA_AGENT_ID, settings.YOOKASSA_PAYOUT_SECRET_KEY)
-    payout = payout_yoo.create_payout_yookassa(balance,
-                                               StreamerCard.objects.get(streamer__user=request.user).number_card)
-    for donate in donates:
-        donate.withdrawn = True
-        donate.save()
-    PayoutModel.objects.create(payout_id=payout.id, payout_sum=payout.amount.value, status=payout.status,
-                               streamer=request.user)
-    return payout.status
+    payout_type = StreamerCard.objects.get(streamer__user=request.user, default_payout=True).type_payout
+    if payout_type == "ЮMoney":
+        payout = payout_yoo.create_payout_yookassa(balance,
+                                                   StreamerCard.objects.get(streamer__user=request.user).number_card)
+        for donate in donates:
+            donate.withdrawn = True
+            donate.save()
+        PayoutModel.objects.create(payout_id=payout.id, payout_sum=payout.amount.value, status=payout.status,
+                                   streamer=request.user)
+        return payout.status
 
 
 def payment_logic(form: DonateForm, username: str) -> str:

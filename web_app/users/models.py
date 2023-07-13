@@ -5,7 +5,7 @@ from config.settings import TYPE_CARD
 
 
 class DonateModel(models.Model):
-    payment = models.OneToOneField(PaymentModel, on_delete=models.PROTECT)
+    payment = models.OneToOneField(PaymentModel, related_name='donate', on_delete=models.PROTECT)
     nickname = models.CharField(verbose_name='Псевдоним', max_length=50)
     message = models.TextField(verbose_name='Сообщение доната', null=True, blank=True)
     streamer = models.ForeignKey('StreamerModel', related_name='streamer', on_delete=models.CASCADE)

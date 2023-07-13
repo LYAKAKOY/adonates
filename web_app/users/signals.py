@@ -18,14 +18,14 @@ def create_streamer_account(sender: User, instance: User, created: bool, **kwarg
         streamer_settings.save()
 
 
-@receiver(post_save, sender=DonateModel)
-def recalc_balance(sender, instance: DonateModel, created: bool, **kwargs) -> None:
-    if created:
-        recount_total_sum.delay(instance.payment.pk)
-        recount_sum_goal.delay(instance.payment.pk)
+@receiver(post_save, sender=PaymentModel)
+def recalc_balance(sender, instance: PaymentModel, created: bool, **kwargs) -> None:
+    if DonateModel.objects.filter(payment=instance).exists():
+        recount_total_sum.delay(instance.pk)
 
 
 @receiver(post_save, sender=PaymentModel)
-def recalc_balance(sender, instance: PaymentModel, created: bool, **kwargs) -> None:
-    if created and DonateModel.objects.filter(payment=instance).exists():
-        recount_total_sum.delay(instance.pk)
+def recalc_goal_sum(sender, instance: PaymentModel, created: bool, **kwargs) -> None:
+    if DonateModel.objects.filter(payment=instance).exists():
+        recount_sum_goal.delay(instance.pk)
+

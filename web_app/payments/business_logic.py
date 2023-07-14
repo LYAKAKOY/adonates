@@ -13,12 +13,11 @@ def payout_logic(request: HttpRequest) -> str:
         streamer__user=request.user).filter(withdrawn=False, payment__status='succeeded')
     balance = donates.aggregate(sum=Sum('payment__payment_sum'))['sum'] or 0
     if balance == 0:
-        return 'balance is zero'
+        return 'balance equal zero'
     payout_yoo = YouKassaPayout(settings.YOOKASSA_AGENT_ID, settings.YOOKASSA_PAYOUT_SECRET_KEY)
-    payout_type = StreamerCard.objects.get(streamer__user=request.user, default_payout=True).type_payout
-    if payout_type == "ЮMoney":
-        payout = payout_yoo.create_payout_yookassa(balance,
-                                                   StreamerCard.objects.get(streamer__user=request.user).number_card)
+    default_card = StreamerCard.objects.get(streamer__user=request.user, default_payout=True)
+    if default_card.type_payout == "ЮMoney":
+        payout = payout_yoo.create_payout_yookassa(balance, default_card.number_card)
         for donate in donates:
             donate.withdrawn = True
             donate.save()

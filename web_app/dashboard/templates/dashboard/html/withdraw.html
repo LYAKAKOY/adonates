@@ -23,25 +23,34 @@
                         <a href="#" class="button_withdraw">Добавить</a>
                     </div>
                     <div class="withdraw__inner">
-{#                        <div class="withdraw__text">#}
-{#                            Вы еще не добавили никакой<br> способ вывода#}
-{#                        </div>#}
-                         <div class="items-container__item">
-                                <div class="items-container__text">
-                                    <img src="{% static 'dashboard/pictures/payout_icons/youmoney.svg' %}" alt="" class="items-container__icon">ЮMoney
-                                </div>
-                            </div>
-                            <div class="items-container__item">
-                                <div class="items-container__text">
-                                    <img src="{% static 'dashboard/pictures/payout_icons/icons8-credit-card-100.png' %}" alt="" class="items-container__icon">Банковская карта
-                                </div>
-                            </div>
-                            <div class="items-container__item">
-                                <div class="items-container__text">
-                                    <img src="{% static 'dashboard/pictures/payout_icons/SBP.svg' %}" alt="" class="items-container__icon"><span hidden>СБП</span>
-                                </div>
-                            </div>
+                        {% if not type_cards %}
+                        <div class="withdraw__text">
+                            Вы еще не добавили никакой<br> способ вывода
                         </div>
+                        {% else %}
+                                {% if "ЮMoney" in type_cards %}
+                                    <div class="items-container__item">
+                                        <div class="items-container__text">
+                                            <img src="{% static 'dashboard/pictures/payout_icons/youmoney.svg' %}" alt="" class="items-container__icon">ЮMoney
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if "Банковская карта" in type_cards %}
+                                    <div class="items-container__item">
+                                        <div class="items-container__text">
+                                            <img src="{% static 'dashboard/pictures/payout_icons/icons8-credit-card-100.png' %}" alt="" class="items-container__icon">Банковская карта
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if "SBP" in type_cards %}
+                                    <div class="items-container__item">
+                                        <div class="items-container__text">
+                                            <img src="{% static 'dashboard/pictures/payout_icons/SBP.svg' %}" alt="" class="items-container__icon"><span hidden>СБП</span>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                        {% endif %}
+                    </div>
                 </section>
             </section> 
 
@@ -103,4 +112,4 @@
     </div>
     {% endblock %}
 
-    {% block js %}<script type="module" src="{% static 'dashboard/js/withdraw.js' %}"></script>{% endblock %}
+    {% block js %}<script src="{% static 'dashboard/js/withdraw.js' %}"></script>{% endblock %}

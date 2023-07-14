@@ -132,7 +132,6 @@ const Payout = function () {
     xhr.send();
 }
 
-
 const itemsCont = document.querySelector('.withdraw__inner');
 let selectedItem;
 

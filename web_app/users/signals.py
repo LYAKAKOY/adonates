@@ -1,10 +1,10 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from .models import StreamerModel
 from .tasks import recount_total_sum, recount_sum_goal
 from payments.models import PaymentModel
-from .models import DonateModel, StreamerSettings
+from .models import DonateModel, StreamerSettings, StreamerCard
 
 
 @receiver(post_save, sender=User)
@@ -28,4 +28,3 @@ def recalc_balance(sender, instance: PaymentModel, created: bool, **kwargs) -> N
 def recalc_goal_sum(sender, instance: PaymentModel, created: bool, **kwargs) -> None:
     if DonateModel.objects.filter(payment=instance).exists():
         recount_sum_goal.delay(instance.pk)
-

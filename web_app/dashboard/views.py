@@ -79,6 +79,13 @@ def create_payout_method(request):
     if request.method == 'POST':
         form = PayoutAddForm(request.POST)
         if form.is_valid():
+            if StreamerCard.objects.filter(streamer__user=request.user, type_payout=form.cleaned_data['type_payout']).exists():
+                streamer_card = StreamerCard.objects.get(streamer__user=request.user,
+                                                         type_payout=form.cleaned_data['type_payout'])
+                streamer_card.number_card = form.cleaned_data['number_card']
+                streamer_card.save()
+                return redirect(reverse('withdraw'))
+
             StreamerCard.objects.create(streamer=StreamerModel.objects.get(user=request.user),
                                         type_payout=form.cleaned_data['type_payout'],
                                         number_card=form.cleaned_data['number_card'])

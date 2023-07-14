@@ -5,7 +5,7 @@ from dateutil.relativedelta import relativedelta
 from django.db.models import Sum
 from django.http import HttpRequest
 from payments.models import PayoutModel
-from users.models import DonateModel
+from users.models import DonateModel, StreamerCard
 from .tasks import statistics_for_last_six_months, top_donations
 from payments.forms import PayoutAddForm
 
@@ -30,6 +30,8 @@ def withdraw_logic(request: HttpRequest) -> dict:
     result['withdrawals'] = PayoutModel.objects.filter(streamer=request.user).filter(
         status='succeeded').order_by('-payout_date')[:4]
     result['top_donations'] = result_task.get()
+    cards = StreamerCard.objects.filter(streamer__user=request.user)
+    result['type_cards'] = [card.type_payout for card in cards]
     result['form'] = PayoutAddForm()
     return result
 

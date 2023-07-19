@@ -25,11 +25,17 @@ class StreamerModel(models.Model):
         return f'{self.user.username}'
 
 
+class StreamerGoal(models.Model):
+    streamer = models.OneToOneField(StreamerModel, verbose_name='Стример', related_name='streamerGoal',
+                                    on_delete=models.CASCADE)
+    sum_goal = models.DecimalField(verbose_name='Сумма цели', max_digits=10, decimal_places=2, default=0.00)
+    goal = models.DecimalField(verbose_name='Цель', max_digits=10, decimal_places=2, default=0.00)
+    description = models.CharField(verbose_name='Описание', max_length=200)
+
+
 class StreamerSettings(models.Model):
     streamer = models.OneToOneField(StreamerModel, verbose_name='Стример', related_name='streamerSettings',
                                     on_delete=models.CASCADE)
-    goal = models.DecimalField(verbose_name='Цель', max_digits=10, decimal_places=2, default=0.00)
-    sum_goal = models.DecimalField(verbose_name='Сумма цели', max_digits=10, decimal_places=2, default=0.00)
     min_sum_donate = models.DecimalField(verbose_name='Минимальная сумма доната',
                                          max_digits=10, decimal_places=2, default=0)
 

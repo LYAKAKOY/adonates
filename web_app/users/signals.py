@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from .models import StreamerModel
 from .tasks import recount_total_sum, recount_sum_goal
 from payments.models import PaymentModel
-from .models import DonateModel, StreamerSettings
+from .models import DonateModel, StreamerSettings, StreamerGoal
 
 
 @receiver(post_save, sender=User)
@@ -13,9 +13,17 @@ def create_streamer_account(sender: User, instance: User, created: bool, **kwarg
         streamer = StreamerModel()
         streamer.user = instance
         streamer.save()
+
+
+@receiver(post_save, sender=StreamerModel)
+def create_streamer_account(sender: User, instance: StreamerModel, created: bool, **kwargs) -> None:
+    if created:
         streamer_settings = StreamerSettings()
-        streamer_settings.streamer = streamer
+        streamer_settings.streamer = instance
         streamer_settings.save()
+        streamer_goal = StreamerGoal()
+        streamer_goal.streamer = instance
+        streamer_goal.save()
 
 
 @receiver(post_save, sender=PaymentModel)
@@ -24,9 +32,9 @@ def recalc_balance(sender, instance: PaymentModel, created: bool, **kwargs) -> N
         recount_total_sum.delay(instance.pk)
 
 
-@receiver(pre_save, sender=StreamerSettings)
-def recalc_balance(sender, instance: StreamerSettings, **kwargs) -> None:
-    if instance.goal != StreamerSettings.objects.get(pk=instance.pk).goal:
+@receiver(pre_save, sender=StreamerGoal)
+def recalc_balance(sender, instance: StreamerGoal, **kwargs) -> None:
+    if instance.pk and instance.goal != StreamerGoal.objects.get(pk=instance.pk).goal:
         instance.sum_goal = 0
 
 

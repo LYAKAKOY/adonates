@@ -30,7 +30,7 @@ class StreamerGoal(models.Model):
                                     on_delete=models.CASCADE)
     sum_goal = models.DecimalField(verbose_name='Сумма цели', max_digits=10, decimal_places=2, default=0.00)
     goal = models.DecimalField(verbose_name='Цель', max_digits=10, decimal_places=2, default=0.00)
-    description = models.CharField(verbose_name='Описание', max_length=200)
+    description = models.CharField(verbose_name='Описание', max_length=200, null=True, blank=True, default=None)
 
 
 class StreamerSettings(models.Model):

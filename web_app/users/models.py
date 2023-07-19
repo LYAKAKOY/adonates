@@ -32,6 +32,9 @@ class StreamerGoal(models.Model):
     goal = models.DecimalField(verbose_name='Цель', max_digits=10, decimal_places=2, default=0.00)
     description = models.CharField(verbose_name='Описание', max_length=200, null=True, blank=True, default=None)
 
+    def __str__(self):
+        return f'{self.streamer.user.username}: {self.goal}'
+
 
 class StreamerSettings(models.Model):
     streamer = models.OneToOneField(StreamerModel, verbose_name='Стример', related_name='streamerSettings',

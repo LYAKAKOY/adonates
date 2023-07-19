@@ -33,12 +33,13 @@ def recalc_balance(sender, instance: PaymentModel, created: bool, **kwargs) -> N
 
 
 @receiver(pre_save, sender=StreamerGoal)
-def recalc_balance(sender, instance: StreamerGoal, **kwargs) -> None:
+def change_goal(sender, instance: StreamerGoal, **kwargs) -> None:
     if instance.pk and instance.goal != StreamerGoal.objects.get(pk=instance.pk).goal:
         instance.sum_goal = 0
 
 
 @receiver(post_save, sender=PaymentModel)
 def recalc_goal_sum(sender, instance: PaymentModel, created: bool, **kwargs) -> None:
-    if DonateModel.objects.filter(payment=instance).exists():
+    if DonateModel.objects.filter(payment=instance).exists() and \
+            int(StreamerGoal.objects.get(streamer=DonateModel.objects.get(payment=instance).streamer).goal) != 0:
         recount_sum_goal.delay(instance.pk)

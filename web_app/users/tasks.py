@@ -9,9 +9,8 @@ from .models import StreamerModel, DonateModel
 def recount_sum_goal(donate_pk: PaymentModel.pk):
     donate = DonateModel.objects.get(payment__pk=donate_pk)
     streamer = StreamerModel.objects.get(user=donate.streamer.user)
-    if donate.payment.status == 'succeeded':
-        streamer.streamerSettings.sum_goal += donate.payment.payment_sum
-        streamer.streamerSettings.save()
+    streamer.streamerGoal.sum_goal += donate.payment.payment_sum
+    streamer.streamerGoal.save()
 
 
 @shared_task(base=Singleton)

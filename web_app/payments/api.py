@@ -25,9 +25,10 @@ class PayoutApiView(APIView):
 def SetDefaultPayoutMethodApi(request):
     if request.method == 'POST':
         payout_method = json.loads(request.body)
-        default_streamer_card = StreamerCard.objects.get(streamer__user=request.user, default_payout=True)
-        default_streamer_card.default_payout = False
-        default_streamer_card.save()
+        if StreamerCard.objects.filter(streamer__user=request.user, default_payout=True).exists():
+            default_streamer_card = StreamerCard.objects.get(streamer__user=request.user, default_payout=True)
+            default_streamer_card.default_payout = False
+            default_streamer_card.save()
         streamer_card = StreamerCard.objects.get(streamer__user=request.user, type_payout=payout_method)
         streamer_card.default_payout = True
         streamer_card.save()

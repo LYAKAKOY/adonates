@@ -112,9 +112,11 @@ const Payout = function () {
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             const payout_status = response.payout_status
-            console.log(payout_status)
-            if (payout_status !== 'succeeded') {
+            if (payout_status === 'balance equal zero') {
                 alert('Простите что-то пошло не так, либо на вашем балансе 0 рублей 🤔')
+            }
+            else if (payout_status === 'no card') {
+                alert('Вы не выбрали никакой способ вывода 😵')
             }
             else {
                 alert('Успешный вывод средств. Деньги придут в течении 15 минут 🤑')

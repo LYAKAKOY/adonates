@@ -4,10 +4,8 @@ from celery.result import AsyncResult
 from dateutil.relativedelta import relativedelta
 from django.db.models import Sum
 from django.http import HttpRequest
-from social_django.models import UserSocialAuth
 from payments.models import PayoutModel
-from users.forms import ChangeProfileForm, ChangeGoalForm, ChangeSettingsForm
-from users.models import DonateModel, StreamerCard, StreamerModel
+from users.models import DonateModel, StreamerCard
 from .tasks import statistics_for_last_six_months, top_donations
 from payments.forms import PayoutAddForm
 

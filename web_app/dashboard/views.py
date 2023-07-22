@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse
 from social_django.models import UserSocialAuth
 from users.models import StreamerModel, DonateModel

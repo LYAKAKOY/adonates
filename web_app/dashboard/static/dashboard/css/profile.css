@@ -372,3 +372,64 @@
     margin: 0;
   }
 }/*# sourceMappingURL=profile.css.map */
+
+.button_refactor,
+.button_save {
+    text-decoration: none;
+    color: #ebebeb;
+    margin: 15px 0;
+    transition: all 0.2s ease;
+}
+
+@media (max-width: 767px) {
+  .button_refactor,
+  .button_save {
+    font-size: calc(12px + 10.2 * ((100vw - 320px) / 1920));
+  }
+}
+@media (min-width: 767px) {
+  .button_refactor,
+  .button_save {
+    font-size: calc(12px + 6 * (100vw / 1920));
+  }
+}
+
+.button_refactor:hover {
+  color: rgba(235, 235, 235, 0.7098039216);
+}
+.button_save:hover {
+  color: rgba(235, 235, 235, 0.7098039216);
+}
+.profile__img {
+  position: relative;
+}
+
+.profile__img img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.profile__back {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.profile__back img {
+  width: 75px;
+  height: 75px;
+  border-radius: 0;
+}
+
+input {
+  border-radius: 4px;
+  border-color: #252525;
+  width: 120px;
+}

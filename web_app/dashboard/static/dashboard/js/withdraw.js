@@ -3,7 +3,7 @@ let sidebar = document.querySelector('.sidebar');
 let closeBtn = document.querySelector('.modal-window-close');
 let modalWindow = document.querySelector('.modal-window');
 const withdrawTitleContainer = document.querySelector('.withdraw__title-container');
-const modalBtn = withdrawTitleContainer.querySelector('.button_withdraw');
+const modalBtn = withdrawTitleContainer.querySelector('.button_refactor');
 let saveBtn = document.querySelector('.save');
 let balance = document.querySelector('.balance__info')
 

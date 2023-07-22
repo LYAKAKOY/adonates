@@ -126,24 +126,24 @@
   width: 100%;
 }
 
-.button_withdraw {
+.button_refactor {
   text-decoration: none;
   color: #ebebeb;
   transition: all 0.2s ease;
 }
 
 @media (max-width: 767px) {
-  .button_withdraw {
+  .button_refactor {
     font-size: calc(12px + 10.2 * ((100vw - 320px) / 1920));
   }
 }
 @media (min-width: 767px) {
-  .button_withdraw {
+  .button_refactor {
     font-size: calc(12px + 6 * (100vw / 1920));
   }
 }
 
-.button_withdraw:hover {
+.button_refactor:hover {
   color: rgba(235, 235, 235, 0.7098039216);
 }
 

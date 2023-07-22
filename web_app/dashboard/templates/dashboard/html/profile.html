@@ -5,15 +5,24 @@
     <link rel="stylesheet" href="{% static 'dashboard/css/statistics.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard/css/profile.css' %}">
 {% endblock %}
+<form id="profile">
 {% block content %}
+        <a href="#" id="profile_info" class="button_refactor">Изменить</a>
+        <a href="#" id="profile_refactor" class="button_save" style="display: none">Сохранить</a>
         <section class="profile">
             <div class="profile__intro">
                 <div class="profile__main">
                     <div class="profile__img">
                         <img src="{{ account.avatar.url }}" alt="">
+                        <label id="profile_refactor" style="display: none" for="image" class="profile__back">
+                            <input type="file" name="image" id="image" hidden>
+                            <img src="{% static 'dashboard/pictures/icon-add-photo.png' %}" alt="">
+                        </label>
                     </div>
                     <div class="profile__info">
-                        <div class="profile__nick">{{ account.user.username }}</div>
+                        <div id="profile_info" class="profile__nick">{{ account.user.username }}</div>
+                        <div class="profile__nick" id="profile_refactor" style="display: none">
+                            <input type="text" value="{{ account.user.username }}"></div>
                         <div class="profile__mp">
                             {% if backend == 'vk-oauth2' %}
                                 <div class="profile__prof"><i class='bx bxl-vk' ></i> Стример</div>
@@ -40,18 +49,27 @@
                     <div class="purpose">
                         <h1 class="purpose-title title">Активная цель</h1>
                         <div class="purpose-inner">
-                            <a style="text-align: center">{{ account.streamerGoal.description }}</a>
+                            <div id="profile_info"><a style="text-align: center">{{ account.streamerGoal.description }}</a></div>
+                            <div id="profile_refactor" style="display: none">
+                                <a style="text-align: center">
+                                <input type="text" value="{{ account.streamerGoal.description }}">
+                                </a>
+                            </div>
                             <div class="purpose__circle-outer">
                                 <div class="purpose__circle-inner">
                                     <div class="purpose__circle-inner-text">{{ account.streamerGoal.sum_goal }}Р/</div>
-                                    <div class="purpose__circle-inner-text">{{ account.streamerGoal.goal }}Р</div>
+                                    <div id="profile_refactor" class="purpose__circle-inner-text" style="display: none">
+                                        <input value="{{ account.streamerGoal.goal }}">
+                                        P
+                                    </div>
+                                    <div id="profile_info" class="purpose__circle-inner-text">{{ account.streamerGoal.goal }}Р</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="profile__donate">
-                    <h1 class="title">Важное</h1>
+                    <h1 class="title">Настройки</h1>
                     <div class="profile__donate-inner">
                         <div class="profile__donate-text">
                             <h1 class="subtitle">Ссылка на донат</h1>
@@ -60,11 +78,10 @@
                                placeholder="http://localhost:8000/donate/{{ account.user.username }}" disabled>
                         <div class="donate__last-container">
                             <div class="subtitle">Минимальная сумма доната</div>
-                            {% if account.streamerSettings.min_sum_donate == 0.00 %}
-                                <p class="donate__last" style="font-size: 14px;">Не задано</p>
-                            {% else %}
-                                <p class="donate__last" style="font-size: 14px;">{{ account.streamerSettings.min_sum_donate }}</p>
-                            {% endif %}
+                            <div id="profile_refactor" style="display: none"><p class="donate__last" style="font-size: 14px;">
+                                <input value="{{ account.streamerSettings.min_sum_donate }}">
+                            </p></div>
+                                <p id="profile_info" class="donate__last" style="font-size: 14px;">{{ account.streamerSettings.min_sum_donate }}</p>
                         </div>
                     </div>
                 </div>
@@ -72,6 +89,6 @@
         </section>
     </section>
 {% endblock %}
-
+</form>
 
 {% block js %}<script type="module" src="{% static 'dashboard/js/profile.js' %}"></script>{% endblock %}

@@ -2,6 +2,28 @@ let btnSide = document.querySelector('#btnside');
 let sidebar = document.querySelector('.sidebar');
 let changeBtn = document.querySelector('.subtitle-change');
 let lastChange = document.querySelector('.donate__last');
+let fieldsProfile = document.querySelectorAll('#profile_info')
+let fieldsRefactorProfile = document.querySelectorAll('#profile_refactor')
+let btnRefactor = document.querySelector('.button_refactor')
+let btnSave = document.querySelector('.button_save')
+
+btnRefactor.onclick = function () {
+    for(let item of fieldsProfile) {
+        item.style.display = "None"
+    }
+    for (let item of fieldsRefactorProfile) {
+        item.style.display = "block"
+    }
+}
+
+btnSave.onclick = function () {
+    for(let item of fieldsProfile) {
+        item.style.display = "block"
+    }
+    for (let item of fieldsRefactorProfile) {
+        item.style.display = "None"
+    }
+}
 
 function createFiller() {
     let elem = document.createElement('div');

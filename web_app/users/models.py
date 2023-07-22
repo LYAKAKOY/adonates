@@ -40,7 +40,7 @@ class StreamerSettings(models.Model):
     streamer = models.OneToOneField(StreamerModel, verbose_name='Стример', related_name='streamerSettings',
                                     on_delete=models.CASCADE)
     min_sum_donate = models.DecimalField(verbose_name='Минимальная сумма доната',
-                                         max_digits=10, decimal_places=2, default=0)
+                                         max_digits=10, decimal_places=2, default=1.00)
 
     def __str__(self):
         return f'{self.streamer.user.username}'

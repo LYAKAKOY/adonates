@@ -91,13 +91,18 @@ def change_profile(request):
         settingsForm = ChangeSettingsForm(request.POST)
         if profileForm.is_valid() and goalForm.is_valid() and settingsForm.is_valid():
             streamer = StreamerModel.objects.get(user=request.user)
-            request.user.username = profileForm.cleaned_data['username']
-            request.user.save()
-            streamer.avatar = profileForm.cleaned_data['avatar']
-            streamer.save()
-            streamer.streamerGoal.goal = goalForm.cleaned_data['goal']
-            streamer.streamerGoal.description = goalForm.cleaned_data['description']
-            streamer.streamerGoal.save()
-            streamer.streamerSettings.min_sum_donate = settingsForm.cleaned_data['min_sum_donate']
-            streamer.streamerSettings.save()
+            if profileForm.cleaned_data['username'] != request.user.username:
+                request.user.username = profileForm.cleaned_data['username']
+                request.user.save()
+            if profileForm.cleaned_data['avatar']:
+                streamer.avatar = profileForm.cleaned_data['avatar']
+                streamer.save()
+            if streamer.streamerGoal.goal != goalForm.cleaned_data['goal']:
+                streamer.streamerGoal.goal = goalForm.cleaned_data['goal']
+            if streamer.streamerGoal.description != goalForm.cleaned_data['description']:
+                streamer.streamerGoal.description = goalForm.cleaned_data['description']
+                streamer.streamerGoal.save()
+            if streamer.streamerSettings.min_sum_donate != settingsForm.cleaned_data['min_sum_donate']:
+                streamer.streamerSettings.min_sum_donate = settingsForm.cleaned_data['min_sum_donate']
+                streamer.streamerSettings.save()
     return redirect(reverse('profile'))

@@ -1,3 +1,4 @@
+from PIL import Image
 from django.db import models
 from django.contrib.auth.models import User
 from payments.models import PaymentModel
@@ -20,6 +21,15 @@ class StreamerModel(models.Model):
     avatar = models.ImageField(verbose_name='Аватарка', default='default_profile_picture.png')
     balance = models.DecimalField(verbose_name='Общая сумма', max_digits=10, decimal_places=2, default=0)
     count_donations = models.IntegerField(verbose_name='Количество донатов', default=0)
+
+    def save(self, *args, **kwargs):
+        super().save()
+
+        image = Image.open(self.avatar.path)
+
+        if image.height > 150 and image.width > 150:
+            image.thumbnail((150, 150))
+            image.save(self.avatar.path)
 
     def __str__(self):
         return f'{self.user.username}'

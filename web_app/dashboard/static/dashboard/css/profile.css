@@ -433,3 +433,7 @@ input {
   border-color: #252525;
   width: 120px;
 }
+
+.avatar {
+  visibility: hidden;
+}

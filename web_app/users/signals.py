@@ -34,7 +34,7 @@ def recalc_balance(sender, instance: PaymentModel, created: bool, **kwargs) -> N
 
 @receiver(pre_save, sender=StreamerGoal)
 def change_goal(sender, instance: StreamerGoal, **kwargs) -> None:
-    if instance.pk and instance.goal != StreamerGoal.objects.get(pk=instance.pk).goal:
+    if instance.pk and instance.description != StreamerGoal.objects.get(pk=instance.pk).description:
         instance.sum_goal = 0
 
 

@@ -5,24 +5,28 @@
     <link rel="stylesheet" href="{% static 'dashboard/css/statistics.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard/css/profile.css' %}">
 {% endblock %}
-<form id="profile">
 {% block content %}
+    <form action="{% url 'change_profile' %}" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
         <a href="#" id="profile_info" class="button_refactor">Изменить</a>
-        <a href="#" id="profile_refactor" class="button_save" style="display: none">Сохранить</a>
+        <button type="submit" id="profile_refactor" style="display: none">Сохранить</button>
         <section class="profile">
             <div class="profile__intro">
                 <div class="profile__main">
+                    <div class="form-error">{{ profileForm.avatar.errors }}</div>
                     <div class="profile__img">
                         <img src="{{ account.avatar.url }}" alt="">
                         <label id="profile_refactor" style="display: none" for="image" class="profile__back">
-                            <input type="file" name="image" id="image" hidden>
+                            {{ profileForm.avatar }}
                             <img src="{% static 'dashboard/pictures/icon-add-photo.png' %}" alt="">
                         </label>
                     </div>
+                    <div class="form-error">{{ profileForm.username.errors }}</div>
                     <div class="profile__info">
                         <div id="profile_info" class="profile__nick">{{ account.user.username }}</div>
                         <div class="profile__nick" id="profile_refactor" style="display: none">
-                            <input type="text" value="{{ account.user.username }}"></div>
+                            {{ profileForm.username }}
+                        </div>
                         <div class="profile__mp">
                             {% if backend == 'vk-oauth2' %}
                                 <div class="profile__prof"><i class='bx bxl-vk' ></i> Стример</div>
@@ -50,16 +54,18 @@
                         <h1 class="purpose-title title">Активная цель</h1>
                         <div class="purpose-inner">
                             <div id="profile_info"><a style="text-align: center">{{ account.streamerGoal.description }}</a></div>
+                            <div class="form-error">{{ goalForm.description.errors }}</div>
                             <div id="profile_refactor" style="display: none">
                                 <a style="text-align: center">
-                                <input type="text" value="{{ account.streamerGoal.description }}">
+                                    {{ goalForm.description }}
                                 </a>
                             </div>
                             <div class="purpose__circle-outer">
+                                <div class="form-error">{{ goalForm.goal.errors }}</div>
                                 <div class="purpose__circle-inner">
                                     <div class="purpose__circle-inner-text">{{ account.streamerGoal.sum_goal }}Р/</div>
                                     <div id="profile_refactor" class="purpose__circle-inner-text" style="display: none">
-                                        <input value="{{ account.streamerGoal.goal }}">
+                                        {{ goalForm.goal }}
                                         P
                                     </div>
                                     <div id="profile_info" class="purpose__circle-inner-text">{{ account.streamerGoal.goal }}Р</div>
@@ -78,8 +84,9 @@
                                placeholder="http://localhost:8000/donate/{{ account.user.username }}" disabled>
                         <div class="donate__last-container">
                             <div class="subtitle">Минимальная сумма доната</div>
+                            <div class="form-error">{{ settingsForm.min_sum_donate.errors }}</div>
                             <div id="profile_refactor" style="display: none"><p class="donate__last" style="font-size: 14px;">
-                                <input value="{{ account.streamerSettings.min_sum_donate }}">
+                                {{ settingsForm.min_sum_donate }}
                             </p></div>
                                 <p id="profile_info" class="donate__last" style="font-size: 14px;">{{ account.streamerSettings.min_sum_donate }}</p>
                         </div>
@@ -88,7 +95,7 @@
             </div>
         </section>
     </section>
+    </form>
 {% endblock %}
-</form>
 
 {% block js %}<script type="module" src="{% static 'dashboard/js/profile.js' %}"></script>{% endblock %}

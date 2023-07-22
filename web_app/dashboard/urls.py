@@ -7,6 +7,7 @@ urlpatterns = [
     path('statistics/', views.StatisticsView.as_view(), name='statistics'),
     path('donations/', views.AllDonationsView.as_view(), name='donations'),
     path('withdraw/', views.WithdrawView.as_view(), name='withdraw'),
+    path('change_profile/', views.change_profile, name='change_profile'),
     path('api/v1/streamers/', API.AccountsDonationsApiView.as_view()),
     path('api/v1/donates/', API.DonatesInfoApiView.as_view()),
     path('api/v1/streamer/', API.AccountDonationsApiView.as_view()),

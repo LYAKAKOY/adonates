@@ -16,15 +16,6 @@ btnRefactor.onclick = function () {
     }
 }
 
-btnSave.onclick = function () {
-    for(let item of fieldsProfile) {
-        item.style.display = "block"
-    }
-    for (let item of fieldsRefactorProfile) {
-        item.style.display = "None"
-    }
-}
-
 function createFiller() {
     let elem = document.createElement('div');
     elem.style.position = 'fixed';

@@ -18,6 +18,7 @@ class DonateModel(models.Model):
     class Meta:
         verbose_name = 'Донат'
         verbose_name_plural = 'Донаты'
+        ordering = ['nickname']
 
 
 class StreamerModel(models.Model):

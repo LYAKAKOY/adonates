@@ -15,6 +15,7 @@ class PaymentModel(models.Model):
     class Meta:
         verbose_name = 'Платеж'
         verbose_name_plural = 'Платежи'
+        ordering = ['-status', 'payment_date', 'payment_sum']
 
 
 class PayoutModel(models.Model):
@@ -30,4 +31,5 @@ class PayoutModel(models.Model):
     class Meta:
         verbose_name = 'Выплата'
         verbose_name_plural = 'Выплаты'
+        ordering = ['streamer', 'payout_sum']
 

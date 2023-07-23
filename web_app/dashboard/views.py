@@ -6,7 +6,7 @@ from users.models import StreamerModel, DonateModel
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from users.forms import ChangeProfileForm, ChangeGoalForm, ChangeSettingsForm
-from .business_logic import statistics_logic, withdraw_logic
+from .business_logic import statistics_logic, withdraw_logic, change_profile_logic
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
@@ -86,23 +86,5 @@ class WithdrawView(DetailView):
 
 def change_profile(request):
     if request.method == 'POST':
-        profileForm = ChangeProfileForm(request.POST, request.FILES)
-        goalForm = ChangeGoalForm(request.POST)
-        settingsForm = ChangeSettingsForm(request.POST)
-        if profileForm.is_valid() and goalForm.is_valid() and settingsForm.is_valid():
-            streamer = StreamerModel.objects.get(user=request.user)
-            if profileForm.cleaned_data['username'] != request.user.username:
-                request.user.username = profileForm.cleaned_data['username']
-                request.user.save()
-            if profileForm.cleaned_data['avatar']:
-                streamer.avatar = profileForm.cleaned_data['avatar']
-                streamer.save()
-            if streamer.streamerGoal.goal != goalForm.cleaned_data['goal']:
-                streamer.streamerGoal.goal = goalForm.cleaned_data['goal']
-            if streamer.streamerGoal.description != goalForm.cleaned_data['description']:
-                streamer.streamerGoal.description = goalForm.cleaned_data['description']
-                streamer.streamerGoal.save()
-            if streamer.streamerSettings.min_sum_donate != settingsForm.cleaned_data['min_sum_donate']:
-                streamer.streamerSettings.min_sum_donate = settingsForm.cleaned_data['min_sum_donate']
-                streamer.streamerSettings.save()
+        change_profile_logic(request)
     return redirect(reverse('profile'))

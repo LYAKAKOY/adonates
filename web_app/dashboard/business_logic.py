@@ -5,7 +5,8 @@ from dateutil.relativedelta import relativedelta
 from django.db.models import Sum
 from django.http import HttpRequest
 from payments.models import PayoutModel
-from users.models import DonateModel, StreamerCard
+from users.forms import ChangeProfileForm, ChangeSettingsForm, ChangeGoalForm
+from users.models import DonateModel, StreamerCard, StreamerModel
 from .tasks import statistics_for_last_six_months, top_donations
 from payments.forms import PayoutAddForm
 
@@ -34,6 +35,28 @@ def withdraw_logic(request: HttpRequest) -> dict:
     result['type_cards'] = [card.type_payout for card in cards]
     result['form'] = PayoutAddForm()
     return result
+
+
+def change_profile_logic(request: HttpRequest) -> None:
+    profileForm = ChangeProfileForm(request.POST, request.FILES)
+    goalForm = ChangeGoalForm(request.POST)
+    settingsForm = ChangeSettingsForm(request.POST)
+    if profileForm.is_valid() and goalForm.is_valid() and settingsForm.is_valid():
+        streamer = StreamerModel.objects.select_related('streamerSettings', 'streamerGoal').get(user=request.user)
+        if profileForm.cleaned_data['username'] != request.user.username:
+            request.user.username = profileForm.cleaned_data['username']
+            request.user.save()
+        if profileForm.cleaned_data['avatar']:
+            streamer.avatar = profileForm.cleaned_data['avatar']
+            streamer.save()
+        if streamer.streamerGoal.goal != goalForm.cleaned_data['goal']:
+            streamer.streamerGoal.goal = goalForm.cleaned_data['goal']
+        if streamer.streamerGoal.description != goalForm.cleaned_data['description']:
+            streamer.streamerGoal.description = goalForm.cleaned_data['description']
+            streamer.streamerGoal.save()
+        if streamer.streamerSettings.min_sum_donate != settingsForm.cleaned_data['min_sum_donate']:
+            streamer.streamerSettings.min_sum_donate = settingsForm.cleaned_data['min_sum_donate']
+            streamer.streamerSettings.save()
 
 
 def get_statistics_for_last_week(username: str) -> List[Dict]:

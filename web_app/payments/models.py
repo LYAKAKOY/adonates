@@ -12,6 +12,10 @@ class PaymentModel(models.Model):
     def __str__(self):
         return f'{self.payment_sum}: {self.status}'
 
+    class Meta:
+        verbose_name = 'Платеж'
+        verbose_name_plural = 'Платежи'
+
 
 class PayoutModel(models.Model):
     payout_id = models.CharField(verbose_name='Выплата', primary_key=True, max_length=50, editable=False)
@@ -23,4 +27,7 @@ class PayoutModel(models.Model):
     def __str__(self):
         return f'{self.streamer.username}: {self.payout_sum}'
 
+    class Meta:
+        verbose_name = 'Выплата'
+        verbose_name_plural = 'Выплаты'
 

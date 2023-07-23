@@ -15,6 +15,10 @@ class DonateModel(models.Model):
     def __str__(self):
         return f'{self.nickname}: {self.payment.payment_sum}'
 
+    class Meta:
+        verbose_name = 'Донат'
+        verbose_name_plural = 'Донаты'
+
 
 class StreamerModel(models.Model):
     user = models.OneToOneField(User, related_name='user', verbose_name='Пользователь', on_delete=models.PROTECT)
@@ -34,6 +38,10 @@ class StreamerModel(models.Model):
     def __str__(self):
         return f'{self.user.username}'
 
+    class Meta:
+        verbose_name = 'Стример'
+        verbose_name_plural = 'Стримеры'
+
 
 class StreamerGoal(models.Model):
     streamer = models.OneToOneField(StreamerModel, verbose_name='Стример', related_name='streamerGoal',
@@ -45,6 +53,10 @@ class StreamerGoal(models.Model):
     def __str__(self):
         return f'{self.streamer.user.username}: {self.goal}'
 
+    class Meta:
+        verbose_name = 'Цель стримера'
+        verbose_name_plural = 'Цели стримеров'
+
 
 class StreamerSettings(models.Model):
     streamer = models.OneToOneField(StreamerModel, verbose_name='Стример', related_name='streamerSettings',
@@ -54,6 +66,10 @@ class StreamerSettings(models.Model):
 
     def __str__(self):
         return f'{self.streamer.user.username}'
+
+    class Meta:
+        verbose_name = 'Настройки стримера'
+        verbose_name_plural = 'Настройки стримеров'
 
 
 class StreamerCard(models.Model):
@@ -65,3 +81,7 @@ class StreamerCard(models.Model):
 
     def __str__(self):
         return f'{self.streamer.user.username}: {self.type_payout}'
+
+    class Meta:
+        verbose_name = 'Способ вывода'
+        verbose_name_plural = 'Способы вывода'

@@ -53,7 +53,11 @@
                     <div class="purpose">
                         <h1 class="purpose-title title">Активная цель</h1>
                         <div class="purpose-inner">
-                            <div id="profile_info"><a style="text-align: center">{{ account.streamerGoal.description }}</a></div>
+                            {% if account.streamerGoal.description %}
+                                <div id="profile_info">
+                                    <a style="text-align: center">{{ account.streamerGoal.description }}</a>
+                                </div>
+                            {% endif %}
                             <div class="form-error">{{ goalForm.description.errors }}</div>
                             <div id="profile_refactor" style="display: none">
                                 <a style="text-align: center">

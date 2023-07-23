@@ -54,7 +54,9 @@
                     <section class="purpose">
                         <h1 class="purpose-title title">Активная цель</h1>
                         <section class="purpose-inner">
-                            <a style="text-align: center">{{ account.streamerGoal.description }}</a>
+                            {% if account.streamerGoal.descriptio %}
+                                <a style="text-align: center">{{ account.streamerGoal.description }}</a>
+                            {% endif %}
                             <div class="purpose__circle-outer">
                                 <div class="purpose__circle-inner">
                                     <div class="purpose__circle-inner-text">{{ account.streamerGoal.sum_goal }}P/</div>

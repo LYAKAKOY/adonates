@@ -21,7 +21,7 @@ class ProfileStreamerView(DetailView):
             profileForm = ChangeProfileForm()
             profileForm.fields['username'].initial = self.request.user.username
             goalForm = ChangeGoalForm()
-            streamer = self.get_object()
+            streamer = StreamerModel.objects.select_related('streamerGoal', 'streamerSettings').get(user=self.request.user)
             goalForm.fields['goal'].initial = streamer.streamerGoal.goal
             goalForm.fields['description'].initial = streamer.streamerGoal.description
             settingsForm = ChangeSettingsForm()
@@ -36,7 +36,7 @@ class ProfileStreamerView(DetailView):
         return super().get_context_data(**context)
 
     def get_object(self, queryset=None):
-        return StreamerModel.objects.get(user=self.request.user)
+        return StreamerModel.objects.select_related('user').get(user=self.request.user)
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
@@ -63,7 +63,7 @@ class AllDonationsView(DetailView):
     context_object_name = 'donations'
 
     def get_object(self, queryset=None):
-        return DonateModel.objects.filter(streamer__user=self.request.user, payment__status='succeeded').order_by(
+        return DonateModel.objects.select_related('payment').filter(streamer__user=self.request.user, payment__status='succeeded').order_by(
             '-payment__payment_date')
 
 

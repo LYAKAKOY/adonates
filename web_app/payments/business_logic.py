@@ -10,7 +10,7 @@ from users.models import DonateModel, StreamerModel, StreamerCard
 
 
 def payout_logic(request: HttpRequest) -> str:
-    donates = DonateModel.objects.filter(
+    donates = DonateModel.objects.select_related('payment').filter(
         streamer__user=request.user).filter(withdrawn=False, payment__status='succeeded')
     balance = StreamerModel.objects.get(user=request.user).balance
     if balance == 0:

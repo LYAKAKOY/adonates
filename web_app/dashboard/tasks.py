@@ -10,7 +10,7 @@ from django.utils.translation import gettext as _
 
 @shared_task(serializer='json')
 def top_donations(username: str) -> List[Dict]:
-    donations = DonateModel.objects.values('nickname').filter(
+    donations = DonateModel.objects.select_related('payment', 'streamer__user').values('nickname').filter(
         streamer__user__username=username, payment__status='succeeded').annotate(
         total_donated_sum=Sum('payment__payment_sum')).order_by('-total_donated_sum')
     return list(donations)

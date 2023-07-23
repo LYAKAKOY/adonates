@@ -46,13 +46,17 @@ def addDonate(request, username):
         form = DonateForm(request.POST)
         if form.is_valid():
             try:
-                payment_id = payment_logic(form, username)
-                return redirect(reverse('payment_confirm') + f'?donate_id={payment_id}')
+                streamer = StreamerModel.objects.select_related('streamerSettings').get(user__username=username)
+                if form.cleaned_data['donated_sum'] > streamer.streamerSettings.min_sum_donate:
+                    payment_id = payment_logic(form, username)
+                    return redirect(reverse('payment_confirm') + f'?donate_id={payment_id}')
+                else:
+                    form.add_error(None, f'Минимальная сумма доната {streamer.streamerSettings.min_sum_donate}P')
             except Exception as e:
                 form.add_error(None, e)
     else:
         form = DonateForm()
 
     return render(request, 'payments/html/donate.html', {'form': form,
-                                                         'streamer': StreamerModel.objects.get(
-                                                             user__username=username)})
+                                                         'streamer': StreamerModel.objects.select_related(
+                                                             'user', 'streamerSettings').get(user__username=username)})
